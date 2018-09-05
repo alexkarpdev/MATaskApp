@@ -1,0 +1,543 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		78C12817213EBB4C0065D8CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C12816213EBB4C0065D8CB /* AppDelegate.swift */; };
+		78C1281C213EBB4C0065D8CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78C1281A213EBB4C0065D8CB /* Main.storyboard */; };
+		78C12821213EBB4D0065D8CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78C1281F213EBB4D0065D8CB /* LaunchScreen.storyboard */; };
+		78C1282A213EE5EE0065D8CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78C12829213EE5EE0065D8CB /* Assets.xcassets */; };
+		78C1282F213EE7D00065D8CB /* MovieItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C1282E213EE7D00065D8CB /* MovieItem.swift */; };
+		78C12831213EE9050065D8CB /* RecsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C12830213EE9050065D8CB /* RecsViewController.swift */; };
+		78C12833213EE95B0065D8CB /* MoviesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C12832213EE95B0065D8CB /* MoviesCollectionView.swift */; };
+		78C12853213EEE8A0065D8CB /* SF-Pro-Display-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78C12835213EEE8A0065D8CB /* SF-Pro-Display-Thin.otf */; };
+		78C12854213EEE8A0065D8CB /* SF-Pro-Display-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78C12836213EEE8A0065D8CB /* SF-Pro-Display-SemiboldItalic.otf */; };
+		78C12855213EEE8A0065D8CB /* SF-Pro-Text-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78C12837213EEE8A0065D8CB /* SF-Pro-Text-Heavy.otf */; };
+		78C12856213EEE8A0065D8CB /* SF-Pro-Display-RegularItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78C12838213EEE8A0065D8CB /* SF-Pro-Display-RegularItalic.otf */; };
+		78C12857213EEE8A0065D8CB /* SF-Pro-Display-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78C12839213EEE8A0065D8CB /* SF-Pro-Display-Light.otf */; };
+		78C12858213EEE8A0065D8CB /* SF-Pro-Display-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78C1283A213EEE8A0065D8CB /* SF-Pro-Display-Regular.otf */; };
+		78C12859213EEE8A0065D8CB /* SF-Pro-Text-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78C1283B213EEE8A0065D8CB /* SF-Pro-Text-MediumItalic.otf */; };
+		78C1285A213EEE8A0065D8CB /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78C1283C213EEE8A0065D8CB /* SF-Pro-Display-Bold.otf */; };
+		78C1285B213EEE8A0065D8CB /* SF-Pro-Display-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78C1283D213EEE8A0065D8CB /* SF-Pro-Display-Medium.otf */; };
+		78C1285C213EEE8A0065D8CB /* SF-Pro-Display-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78C1283E213EEE8A0065D8CB /* SF-Pro-Display-Heavy.otf */; };
+		78C1285D213EEE8A0065D8CB /* SF-Pro-Text-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78C1283F213EEE8A0065D8CB /* SF-Pro-Text-Light.otf */; };
+		78C1285E213EEE8A0065D8CB /* SF-Pro-Display-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78C12840213EEE8A0065D8CB /* SF-Pro-Display-Semibold.otf */; };
+		78C1285F213EEE8A0065D8CB /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78C12841213EEE8A0065D8CB /* SF-Pro-Text-Regular.otf */; };
+		78C12860213EEE8A0065D8CB /* SF-Pro-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78C12842213EEE8A0065D8CB /* SF-Pro-Text-Bold.otf */; };
+		78C12861213EEE8A0065D8CB /* SF-Pro-Display-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78C12843213EEE8A0065D8CB /* SF-Pro-Display-MediumItalic.otf */; };
+		78C12862213EEE8A0065D8CB /* SF-Pro-Display-HeavyItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78C12844213EEE8A0065D8CB /* SF-Pro-Display-HeavyItalic.otf */; };
+		78C12863213EEE8A0065D8CB /* SF-Pro-Display-Ultralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78C12845213EEE8A0065D8CB /* SF-Pro-Display-Ultralight.otf */; };
+		78C12864213EEE8A0065D8CB /* SF-Pro-Display-UltralightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78C12846213EEE8A0065D8CB /* SF-Pro-Display-UltralightItalic.otf */; };
+		78C12865213EEE8A0065D8CB /* SF-Pro-Display-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78C12847213EEE8A0065D8CB /* SF-Pro-Display-LightItalic.otf */; };
+		78C12866213EEE8A0065D8CB /* SF-Pro-Display-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78C12848213EEE8A0065D8CB /* SF-Pro-Display-BlackItalic.otf */; };
+		78C12867213EEE8A0065D8CB /* SF-Pro-Display-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78C12849213EEE8A0065D8CB /* SF-Pro-Display-Black.otf */; };
+		78C12868213EEE8A0065D8CB /* SF-Pro-Text-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78C1284A213EEE8A0065D8CB /* SF-Pro-Text-BoldItalic.otf */; };
+		78C12869213EEE8A0065D8CB /* SF-Pro-Text-RegularItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78C1284B213EEE8A0065D8CB /* SF-Pro-Text-RegularItalic.otf */; };
+		78C1286A213EEE8A0065D8CB /* SF-Pro-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78C1284C213EEE8A0065D8CB /* SF-Pro-Text-Semibold.otf */; };
+		78C1286B213EEE8A0065D8CB /* SF-Pro-Text-HeavyItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78C1284D213EEE8A0065D8CB /* SF-Pro-Text-HeavyItalic.otf */; };
+		78C1286C213EEE8A0065D8CB /* SF-Pro-Display-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78C1284E213EEE8A0065D8CB /* SF-Pro-Display-ThinItalic.otf */; };
+		78C1286D213EEE8A0065D8CB /* SF-Pro-Text-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78C1284F213EEE8A0065D8CB /* SF-Pro-Text-LightItalic.otf */; };
+		78C1286E213EEE8A0065D8CB /* SF-Pro-Text-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78C12850213EEE8A0065D8CB /* SF-Pro-Text-Medium.otf */; };
+		78C1286F213EEE8A0065D8CB /* SF-Pro-Display-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78C12851213EEE8A0065D8CB /* SF-Pro-Display-BoldItalic.otf */; };
+		78C12870213EEE8A0065D8CB /* SF-Pro-Text-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78C12852213EEE8A0065D8CB /* SF-Pro-Text-SemiboldItalic.otf */; };
+		78C12872213EFBB90065D8CB /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C12871213EFBB90065D8CB /* MovieCell.swift */; };
+		78C12875213EFE510065D8CB /* DBController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C12874213EFE510065D8CB /* DBController.swift */; };
+		78C12879213F07900065D8CB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C12878213F07900065D8CB /* Extensions.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		78C12813213EBB4C0065D8CB /* MATaskApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MATaskApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		78C12816213EBB4C0065D8CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		78C1281B213EBB4C0065D8CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		78C12820213EBB4D0065D8CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		78C12822213EBB4D0065D8CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		78C12829213EE5EE0065D8CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		78C1282E213EE7D00065D8CB /* MovieItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieItem.swift; sourceTree = "<group>"; };
+		78C12830213EE9050065D8CB /* RecsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecsViewController.swift; sourceTree = "<group>"; };
+		78C12832213EE95B0065D8CB /* MoviesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCollectionView.swift; sourceTree = "<group>"; };
+		78C12835213EEE8A0065D8CB /* SF-Pro-Display-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Thin.otf"; sourceTree = "<group>"; };
+		78C12836213EEE8A0065D8CB /* SF-Pro-Display-SemiboldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-SemiboldItalic.otf"; sourceTree = "<group>"; };
+		78C12837213EEE8A0065D8CB /* SF-Pro-Text-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Heavy.otf"; sourceTree = "<group>"; };
+		78C12838213EEE8A0065D8CB /* SF-Pro-Display-RegularItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-RegularItalic.otf"; sourceTree = "<group>"; };
+		78C12839213EEE8A0065D8CB /* SF-Pro-Display-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Light.otf"; sourceTree = "<group>"; };
+		78C1283A213EEE8A0065D8CB /* SF-Pro-Display-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Regular.otf"; sourceTree = "<group>"; };
+		78C1283B213EEE8A0065D8CB /* SF-Pro-Text-MediumItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-MediumItalic.otf"; sourceTree = "<group>"; };
+		78C1283C213EEE8A0065D8CB /* SF-Pro-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Bold.otf"; sourceTree = "<group>"; };
+		78C1283D213EEE8A0065D8CB /* SF-Pro-Display-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Medium.otf"; sourceTree = "<group>"; };
+		78C1283E213EEE8A0065D8CB /* SF-Pro-Display-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Heavy.otf"; sourceTree = "<group>"; };
+		78C1283F213EEE8A0065D8CB /* SF-Pro-Text-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Light.otf"; sourceTree = "<group>"; };
+		78C12840213EEE8A0065D8CB /* SF-Pro-Display-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Semibold.otf"; sourceTree = "<group>"; };
+		78C12841213EEE8A0065D8CB /* SF-Pro-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Regular.otf"; sourceTree = "<group>"; };
+		78C12842213EEE8A0065D8CB /* SF-Pro-Text-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Bold.otf"; sourceTree = "<group>"; };
+		78C12843213EEE8A0065D8CB /* SF-Pro-Display-MediumItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-MediumItalic.otf"; sourceTree = "<group>"; };
+		78C12844213EEE8A0065D8CB /* SF-Pro-Display-HeavyItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-HeavyItalic.otf"; sourceTree = "<group>"; };
+		78C12845213EEE8A0065D8CB /* SF-Pro-Display-Ultralight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Ultralight.otf"; sourceTree = "<group>"; };
+		78C12846213EEE8A0065D8CB /* SF-Pro-Display-UltralightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-UltralightItalic.otf"; sourceTree = "<group>"; };
+		78C12847213EEE8A0065D8CB /* SF-Pro-Display-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-LightItalic.otf"; sourceTree = "<group>"; };
+		78C12848213EEE8A0065D8CB /* SF-Pro-Display-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-BlackItalic.otf"; sourceTree = "<group>"; };
+		78C12849213EEE8A0065D8CB /* SF-Pro-Display-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Black.otf"; sourceTree = "<group>"; };
+		78C1284A213EEE8A0065D8CB /* SF-Pro-Text-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-BoldItalic.otf"; sourceTree = "<group>"; };
+		78C1284B213EEE8A0065D8CB /* SF-Pro-Text-RegularItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-RegularItalic.otf"; sourceTree = "<group>"; };
+		78C1284C213EEE8A0065D8CB /* SF-Pro-Text-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Semibold.otf"; sourceTree = "<group>"; };
+		78C1284D213EEE8A0065D8CB /* SF-Pro-Text-HeavyItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-HeavyItalic.otf"; sourceTree = "<group>"; };
+		78C1284E213EEE8A0065D8CB /* SF-Pro-Display-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-ThinItalic.otf"; sourceTree = "<group>"; };
+		78C1284F213EEE8A0065D8CB /* SF-Pro-Text-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-LightItalic.otf"; sourceTree = "<group>"; };
+		78C12850213EEE8A0065D8CB /* SF-Pro-Text-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Medium.otf"; sourceTree = "<group>"; };
+		78C12851213EEE8A0065D8CB /* SF-Pro-Display-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-BoldItalic.otf"; sourceTree = "<group>"; };
+		78C12852213EEE8A0065D8CB /* SF-Pro-Text-SemiboldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-SemiboldItalic.otf"; sourceTree = "<group>"; };
+		78C12871213EFBB90065D8CB /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
+		78C12874213EFE510065D8CB /* DBController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBController.swift; sourceTree = "<group>"; };
+		78C12878213F07900065D8CB /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		78C12810213EBB4C0065D8CB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		78C1280A213EBB4B0065D8CB = {
+			isa = PBXGroup;
+			children = (
+				78C12815213EBB4C0065D8CB /* MATaskApp */,
+				78C12814213EBB4C0065D8CB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		78C12814213EBB4C0065D8CB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				78C12813213EBB4C0065D8CB /* MATaskApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		78C12815213EBB4C0065D8CB /* MATaskApp */ = {
+			isa = PBXGroup;
+			children = (
+				78C12822213EBB4D0065D8CB /* Info.plist */,
+				78C1287F213F136E0065D8CB /* Views */,
+				78C1287E213F13600065D8CB /* ViewControllers */,
+				78C12877213F077E0065D8CB /* Helpers */,
+				78C12873213EFE120065D8CB /* Serviсes */,
+				78C1282B213EE7680065D8CB /* SwiftObjects */,
+				78C12828213EBFF90065D8CB /* Cells */,
+				78C1287D213F13430065D8CB /* Resources */,
+			);
+			path = MATaskApp;
+			sourceTree = "<group>";
+		};
+		78C12828213EBFF90065D8CB /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				78C12871213EFBB90065D8CB /* MovieCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		78C1282B213EE7680065D8CB /* SwiftObjects */ = {
+			isa = PBXGroup;
+			children = (
+				78C1282E213EE7D00065D8CB /* MovieItem.swift */,
+			);
+			path = SwiftObjects;
+			sourceTree = "<group>";
+		};
+		78C12834213EEE8A0065D8CB /* SFPro */ = {
+			isa = PBXGroup;
+			children = (
+				78C12835213EEE8A0065D8CB /* SF-Pro-Display-Thin.otf */,
+				78C12836213EEE8A0065D8CB /* SF-Pro-Display-SemiboldItalic.otf */,
+				78C12837213EEE8A0065D8CB /* SF-Pro-Text-Heavy.otf */,
+				78C12838213EEE8A0065D8CB /* SF-Pro-Display-RegularItalic.otf */,
+				78C12839213EEE8A0065D8CB /* SF-Pro-Display-Light.otf */,
+				78C1283A213EEE8A0065D8CB /* SF-Pro-Display-Regular.otf */,
+				78C1283B213EEE8A0065D8CB /* SF-Pro-Text-MediumItalic.otf */,
+				78C1283C213EEE8A0065D8CB /* SF-Pro-Display-Bold.otf */,
+				78C1283D213EEE8A0065D8CB /* SF-Pro-Display-Medium.otf */,
+				78C1283E213EEE8A0065D8CB /* SF-Pro-Display-Heavy.otf */,
+				78C1283F213EEE8A0065D8CB /* SF-Pro-Text-Light.otf */,
+				78C12840213EEE8A0065D8CB /* SF-Pro-Display-Semibold.otf */,
+				78C12841213EEE8A0065D8CB /* SF-Pro-Text-Regular.otf */,
+				78C12842213EEE8A0065D8CB /* SF-Pro-Text-Bold.otf */,
+				78C12843213EEE8A0065D8CB /* SF-Pro-Display-MediumItalic.otf */,
+				78C12844213EEE8A0065D8CB /* SF-Pro-Display-HeavyItalic.otf */,
+				78C12845213EEE8A0065D8CB /* SF-Pro-Display-Ultralight.otf */,
+				78C12846213EEE8A0065D8CB /* SF-Pro-Display-UltralightItalic.otf */,
+				78C12847213EEE8A0065D8CB /* SF-Pro-Display-LightItalic.otf */,
+				78C12848213EEE8A0065D8CB /* SF-Pro-Display-BlackItalic.otf */,
+				78C12849213EEE8A0065D8CB /* SF-Pro-Display-Black.otf */,
+				78C1284A213EEE8A0065D8CB /* SF-Pro-Text-BoldItalic.otf */,
+				78C1284B213EEE8A0065D8CB /* SF-Pro-Text-RegularItalic.otf */,
+				78C1284C213EEE8A0065D8CB /* SF-Pro-Text-Semibold.otf */,
+				78C1284D213EEE8A0065D8CB /* SF-Pro-Text-HeavyItalic.otf */,
+				78C1284E213EEE8A0065D8CB /* SF-Pro-Display-ThinItalic.otf */,
+				78C1284F213EEE8A0065D8CB /* SF-Pro-Text-LightItalic.otf */,
+				78C12850213EEE8A0065D8CB /* SF-Pro-Text-Medium.otf */,
+				78C12851213EEE8A0065D8CB /* SF-Pro-Display-BoldItalic.otf */,
+				78C12852213EEE8A0065D8CB /* SF-Pro-Text-SemiboldItalic.otf */,
+			);
+			path = SFPro;
+			sourceTree = "<group>";
+		};
+		78C12873213EFE120065D8CB /* Serviсes */ = {
+			isa = PBXGroup;
+			children = (
+				78C12874213EFE510065D8CB /* DBController.swift */,
+			);
+			path = "Serviсes";
+			sourceTree = "<group>";
+		};
+		78C12877213F077E0065D8CB /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				78C12878213F07900065D8CB /* Extensions.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		78C1287D213F13430065D8CB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				78C12834213EEE8A0065D8CB /* SFPro */,
+				78C12816213EBB4C0065D8CB /* AppDelegate.swift */,
+				78C1281A213EBB4C0065D8CB /* Main.storyboard */,
+				78C1281F213EBB4D0065D8CB /* LaunchScreen.storyboard */,
+				78C12829213EE5EE0065D8CB /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		78C1287E213F13600065D8CB /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				78C12830213EE9050065D8CB /* RecsViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		78C1287F213F136E0065D8CB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				78C12832213EE95B0065D8CB /* MoviesCollectionView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		78C12812213EBB4C0065D8CB /* MATaskApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 78C12825213EBB4D0065D8CB /* Build configuration list for PBXNativeTarget "MATaskApp" */;
+			buildPhases = (
+				78C1280F213EBB4C0065D8CB /* Sources */,
+				78C12810213EBB4C0065D8CB /* Frameworks */,
+				78C12811213EBB4C0065D8CB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MATaskApp;
+			productName = MATaskApp;
+			productReference = 78C12813213EBB4C0065D8CB /* MATaskApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		78C1280B213EBB4B0065D8CB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0940;
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = "Alexey Karpov";
+				TargetAttributes = {
+					78C12812213EBB4C0065D8CB = {
+						CreatedOnToolsVersion = 9.4.1;
+					};
+				};
+			};
+			buildConfigurationList = 78C1280E213EBB4B0065D8CB /* Build configuration list for PBXProject "MATaskApp" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 78C1280A213EBB4B0065D8CB;
+			productRefGroup = 78C12814213EBB4C0065D8CB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				78C12812213EBB4C0065D8CB /* MATaskApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		78C12811213EBB4C0065D8CB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				78C12864213EEE8A0065D8CB /* SF-Pro-Display-UltralightItalic.otf in Resources */,
+				78C1285B213EEE8A0065D8CB /* SF-Pro-Display-Medium.otf in Resources */,
+				78C12869213EEE8A0065D8CB /* SF-Pro-Text-RegularItalic.otf in Resources */,
+				78C12859213EEE8A0065D8CB /* SF-Pro-Text-MediumItalic.otf in Resources */,
+				78C12868213EEE8A0065D8CB /* SF-Pro-Text-BoldItalic.otf in Resources */,
+				78C12853213EEE8A0065D8CB /* SF-Pro-Display-Thin.otf in Resources */,
+				78C1286A213EEE8A0065D8CB /* SF-Pro-Text-Semibold.otf in Resources */,
+				78C12855213EEE8A0065D8CB /* SF-Pro-Text-Heavy.otf in Resources */,
+				78C12862213EEE8A0065D8CB /* SF-Pro-Display-HeavyItalic.otf in Resources */,
+				78C12861213EEE8A0065D8CB /* SF-Pro-Display-MediumItalic.otf in Resources */,
+				78C1286D213EEE8A0065D8CB /* SF-Pro-Text-LightItalic.otf in Resources */,
+				78C12856213EEE8A0065D8CB /* SF-Pro-Display-RegularItalic.otf in Resources */,
+				78C1286B213EEE8A0065D8CB /* SF-Pro-Text-HeavyItalic.otf in Resources */,
+				78C1286E213EEE8A0065D8CB /* SF-Pro-Text-Medium.otf in Resources */,
+				78C12865213EEE8A0065D8CB /* SF-Pro-Display-LightItalic.otf in Resources */,
+				78C12866213EEE8A0065D8CB /* SF-Pro-Display-BlackItalic.otf in Resources */,
+				78C12863213EEE8A0065D8CB /* SF-Pro-Display-Ultralight.otf in Resources */,
+				78C12867213EEE8A0065D8CB /* SF-Pro-Display-Black.otf in Resources */,
+				78C1286F213EEE8A0065D8CB /* SF-Pro-Display-BoldItalic.otf in Resources */,
+				78C12870213EEE8A0065D8CB /* SF-Pro-Text-SemiboldItalic.otf in Resources */,
+				78C12821213EBB4D0065D8CB /* LaunchScreen.storyboard in Resources */,
+				78C1285F213EEE8A0065D8CB /* SF-Pro-Text-Regular.otf in Resources */,
+				78C1282A213EE5EE0065D8CB /* Assets.xcassets in Resources */,
+				78C1285C213EEE8A0065D8CB /* SF-Pro-Display-Heavy.otf in Resources */,
+				78C12860213EEE8A0065D8CB /* SF-Pro-Text-Bold.otf in Resources */,
+				78C1281C213EBB4C0065D8CB /* Main.storyboard in Resources */,
+				78C12857213EEE8A0065D8CB /* SF-Pro-Display-Light.otf in Resources */,
+				78C12858213EEE8A0065D8CB /* SF-Pro-Display-Regular.otf in Resources */,
+				78C12854213EEE8A0065D8CB /* SF-Pro-Display-SemiboldItalic.otf in Resources */,
+				78C1285E213EEE8A0065D8CB /* SF-Pro-Display-Semibold.otf in Resources */,
+				78C1285D213EEE8A0065D8CB /* SF-Pro-Text-Light.otf in Resources */,
+				78C1286C213EEE8A0065D8CB /* SF-Pro-Display-ThinItalic.otf in Resources */,
+				78C1285A213EEE8A0065D8CB /* SF-Pro-Display-Bold.otf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		78C1280F213EBB4C0065D8CB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				78C1282F213EE7D00065D8CB /* MovieItem.swift in Sources */,
+				78C12817213EBB4C0065D8CB /* AppDelegate.swift in Sources */,
+				78C12831213EE9050065D8CB /* RecsViewController.swift in Sources */,
+				78C12872213EFBB90065D8CB /* MovieCell.swift in Sources */,
+				78C12833213EE95B0065D8CB /* MoviesCollectionView.swift in Sources */,
+				78C12875213EFE510065D8CB /* DBController.swift in Sources */,
+				78C12879213F07900065D8CB /* Extensions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		78C1281A213EBB4C0065D8CB /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				78C1281B213EBB4C0065D8CB /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		78C1281F213EBB4D0065D8CB /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				78C12820213EBB4D0065D8CB /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		78C12823213EBB4D0065D8CB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		78C12824213EBB4D0065D8CB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		78C12826213EBB4D0065D8CB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DAC52DC6FR;
+				INFOPLIST_FILE = MATaskApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.alexkarpdev.MATaskApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		78C12827213EBB4D0065D8CB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DAC52DC6FR;
+				INFOPLIST_FILE = MATaskApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.alexkarpdev.MATaskApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		78C1280E213EBB4B0065D8CB /* Build configuration list for PBXProject "MATaskApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				78C12823213EBB4D0065D8CB /* Debug */,
+				78C12824213EBB4D0065D8CB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		78C12825213EBB4D0065D8CB /* Build configuration list for PBXNativeTarget "MATaskApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				78C12826213EBB4D0065D8CB /* Debug */,
+				78C12827213EBB4D0065D8CB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 78C1280B213EBB4B0065D8CB /* Project object */;
+}
