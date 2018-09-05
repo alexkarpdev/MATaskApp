@@ -19,13 +19,10 @@ class MoviesCollectionView: UICollectionView {
         }
     }
     
-    
-    private var animCount = 0
     private let scrollVelocityMin: CGFloat = 0.5
     private let hyperScrollLimit: CGFloat = 2.2
     private var targetPoint = CGPoint()
     private var isHyperScrolling = false
-    private var isAnimating = false
     private var slideAnimator = UIViewPropertyAnimator()
     private var didStoppingCellNumber: Int = 0
     private var animationController: AnimationController!
@@ -145,11 +142,7 @@ extension MoviesCollectionView {
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         
-        print("slideAnimator.isRunning: \(slideAnimator.isRunning)")
-        isAnimating = true
         if velocity.x.abs < hyperScrollLimit {
-            print("usual Start: \(animCount)")
-            animCount += 1
             isHyperScrolling = false
             targetContentOffset.pointee = scrollView.contentOffset
             startSlideAnimation(velocity: velocity)
@@ -161,40 +154,12 @@ extension MoviesCollectionView {
     
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
         if !isHyperScrolling { stopDeceleration(for: scrollView) }
-        
-    }
-    
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        
-        
-    }
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        let cellWidth = collectionViewFlowLayout.itemSize.width
-        let lineSpacing = collectionViewFlowLayout.minimumLineSpacing
-        print("didScroll : \(slideAnimator.isRunning)")
-        
-        print("Expression: \(Int(scrollView.contentOffset.x.rounded()) % Int((cellWidth + lineSpacing).rounded()))")
-        if !slideAnimator.isRunning  {
-            
-            if Int(scrollView.contentOffset.x.rounded()) % Int((cellWidth + lineSpacing).rounded()) == 0 {
-                print("hap")
-                
-                let generator = UIImpactFeedbackGenerator(style: .light)
-                generator.impactOccurred()
-                
-            }
-        }
-        
         if isHyperScrolling && (targetPoint.x - scrollView.contentOffset.x).abs < 50 {
             stopDeceleration(for: scrollView)
-            print("hyper Start: \(animCount)")
-            animCount += 1
             startSlideAnimation()
         }
     }
