@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RecsViewController: UIViewController {
+class RecsViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var movieCollectionView: MoviesCollectionView!
 
@@ -27,9 +27,10 @@ class RecsViewController: UIViewController {
     }
     
     func configure() {
-        //movieCollectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.identifier)
         movieCollectionView.configure(movieItems: DBController.prepareData(for: moviesCount))
     }
+    
+    
     
 
     /*
@@ -43,3 +44,4 @@ class RecsViewController: UIViewController {
     */
 
 }
+

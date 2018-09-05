@@ -42,7 +42,9 @@ class MoviesCollectionView: UICollectionView {
     
     public func configure(movieItems: [MovieItem]) {
         self.movieItems = movieItems
-        animationController = AnimationController(collectionView: self)
+        animationController = AnimationController(collectionView: self) { [unowned self] isLock in
+            self.isScrollEnabled = !isLock
+        }
     }
     
     override func layoutSubviews() {
@@ -129,6 +131,8 @@ extension MoviesCollectionView {
         })
         slideAnimator.addCompletion(){ position in
             if position == .end {
+                self.animationController.panGestureRecognizer.isEnabled = true
+                self.animationController.cellImageView = (self.cellForItem(at: IndexPath(row: nextNumber, section: 0)) as! MovieCell).posterImageView
                 let generator = UIImpactFeedbackGenerator(style: .medium)
                 generator.impactOccurred()
                 self.didStoppingCellNumber = self.calculateWillStoppingCellNumber()
@@ -157,13 +161,17 @@ extension MoviesCollectionView {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
+        animationController.panGestureRecognizer.isEnabled = false
         if isHyperScrolling && (targetPoint.x - scrollView.contentOffset.x).abs < 50 {
             stopDeceleration(for: scrollView)
             startSlideAnimation()
         }
     }
+    
 }
+
+
+
 
 
 

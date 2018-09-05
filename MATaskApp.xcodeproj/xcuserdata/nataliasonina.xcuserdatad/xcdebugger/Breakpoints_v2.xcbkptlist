@@ -9,56 +9,8 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MATaskApp/Helpers/AnimationController.swift"
-            timestampString = "557866338.57175"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
-            landmarkName = "handlePan(recognizer:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MATaskApp.AnimationController.handlePan(recognizer: __ObjC.UIPanGestureRecognizer) -&gt; ()"
-                  moduleName = "MATaskApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/nataliasonina/Documents/Xcode%20projects/MATaskApp/MATaskApp/Helpers/AnimationController.swift"
-                  timestampString = "557854820.476043"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "56"
-                  endingLineNumber = "56"
-                  offsetFromSymbolStart = "140">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in MATaskApp.AnimationController.handlePan(recognizer: __ObjC.UIPanGestureRecognizer) -&gt; ()"
-                  moduleName = "MATaskApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/nataliasonina/Documents/Xcode%20projects/MATaskApp/MATaskApp/Helpers/AnimationController.swift"
-                  timestampString = "557854820.478747"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "57"
-                  endingLineNumber = "57"
-                  offsetFromSymbolStart = "20">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "MATaskApp/Helpers/Extensions.swift"
-            timestampString = "557866338.572173"
+            timestampString = "557877250.3886549"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "76"
@@ -74,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MATaskApp/Views/MoviesCollectionView.swift"
-            timestampString = "557866338.572238"
+            timestampString = "557877250.388737"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "33"
@@ -89,14 +41,14 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MATaskApp/Helpers/AnimationController.swift"
-            timestampString = "557866338.572594"
+            filePath = "MATaskApp/Views/MoviesCollectionView.swift"
+            timestampString = "557877250.3892241"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "cellView"
-            landmarkType = "24">
+            startingLineNumber = "111"
+            endingLineNumber = "111"
+            landmarkName = "startSlideAnimation(velocity:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -105,13 +57,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MATaskApp/Views/MoviesCollectionView.swift"
-            timestampString = "557866338.572883"
+            filePath = "MATaskApp/Helpers/AnimationController.swift"
+            timestampString = "557877250.389554"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
-            landmarkName = "startSlideAnimation(velocity:)"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "handlePan(recognizer:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
