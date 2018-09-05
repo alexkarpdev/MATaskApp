@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		78237218214019BE000182EB /* AnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78237217214019BE000182EB /* AnimationController.swift */; };
 		78C12817213EBB4C0065D8CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C12816213EBB4C0065D8CB /* AppDelegate.swift */; };
 		78C1281C213EBB4C0065D8CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78C1281A213EBB4C0065D8CB /* Main.storyboard */; };
 		78C12821213EBB4D0065D8CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78C1281F213EBB4D0065D8CB /* LaunchScreen.storyboard */; };
@@ -50,6 +51,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		78237217214019BE000182EB /* AnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationController.swift; sourceTree = "<group>"; };
 		78C12813213EBB4C0065D8CB /* MATaskApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MATaskApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78C12816213EBB4C0065D8CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		78C1281B213EBB4C0065D8CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				78C12878213F07900065D8CB /* Extensions.swift */,
+				78237217214019BE000182EB /* AnimationController.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78237218214019BE000182EB /* AnimationController.swift in Sources */,
 				78C1282F213EE7D00065D8CB /* MovieItem.swift in Sources */,
 				78C12817213EBB4C0065D8CB /* AppDelegate.swift in Sources */,
 				78C12831213EE9050065D8CB /* RecsViewController.swift in Sources */,
