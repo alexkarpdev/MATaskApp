@@ -9,25 +9,28 @@
 import UIKit
 
 class MoviesCollectionView: UICollectionView {
-    
-    var collectionViewFlowLayout: UICollectionViewFlowLayout {
+
+    private var collectionViewFlowLayout: UICollectionViewFlowLayout {
         return collectionViewLayout as! UICollectionViewFlowLayout
     }
-    var movieItems = [MovieItem]() {
+    private var movieItems = [MovieItem]() {
         didSet {
             self.reloadData()
         }
     }
     
-    let leftSectionInset: CGFloat = 25.0
-    let scrollVelocityMin: CGFloat = 0.5
-    let hyperScrollLimit: CGFloat = 2.2
     
-    var targetPoint = CGPoint()
-    var isHyperScrolling = false
-    var didStoppingCellNumber: Int = 0
+    private var animCount = 0
+    private let scrollVelocityMin: CGFloat = 0.5
+    private let hyperScrollLimit: CGFloat = 2.2
+    private var targetPoint = CGPoint()
+    private var isHyperScrolling = false
+    private var isAnimating = false
+    private var slideAnimator = UIViewPropertyAnimator()
+    private var didStoppingCellNumber: Int = 0
+    private var animationController: AnimationController!
     
-    var animationController: AnimationController!
+    public let leftSectionInset: CGFloat = 25.0
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
@@ -40,8 +43,8 @@ class MoviesCollectionView: UICollectionView {
         self.dataSource = self
     }
     
-    func configure() {
-
+    public func configure(movieItems: [MovieItem]) {
+        self.movieItems = movieItems
         animationController = AnimationController(collectionView: self)
     }
     
@@ -121,21 +124,32 @@ extension MoviesCollectionView {
             
             nextNumber = canSlide ? (didStoppingCellNumber + (canSlideNext ? 1 : -1)) : willStoppingCellNumber
         }
+        isHyperScrolling = false
         let toPoint = CGPoint(x: nextNumber * Int(cellWidth + lineSpacing), y: 0)
         
-        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.3, delay: 0, options: [.allowUserInteraction, .curveEaseInOut], animations: {
+        slideAnimator = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut, animations: {
             self.contentOffset = toPoint
-        }, completion: { position in
-            //self.contentOffset = toPoint
-            self.didStoppingCellNumber = self.calculateWillStoppingCellNumber()
-            //self.animationController.cellView = (self.cellForItem(at: IndexPath(row: self.didStoppingCellNumber, section: 0)) as! MovieCell).posterImageView
         })
+        slideAnimator.addCompletion(){ position in
+            if position == .end {
+                let generator = UIImpactFeedbackGenerator(style: .medium)
+                generator.impactOccurred()
+                self.didStoppingCellNumber = self.calculateWillStoppingCellNumber()
+            }
+        }
+        slideAnimator.startAnimation()
+
     }
     
     // MARK: - Scrollview delegate methods
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        
+        print("slideAnimator.isRunning: \(slideAnimator.isRunning)")
+        isAnimating = true
         if velocity.x.abs < hyperScrollLimit {
+            print("usual Start: \(animCount)")
+            animCount += 1
             isHyperScrolling = false
             targetContentOffset.pointee = scrollView.contentOffset
             startSlideAnimation(velocity: velocity)
@@ -147,11 +161,40 @@ extension MoviesCollectionView {
     
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
         if !isHyperScrolling { stopDeceleration(for: scrollView) }
+        
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        
+        
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if isHyperScrolling && (targetPoint.x - scrollView.contentOffset.x).abs < 20 {
+        
+        let cellWidth = collectionViewFlowLayout.itemSize.width
+        let lineSpacing = collectionViewFlowLayout.minimumLineSpacing
+        print("didScroll : \(slideAnimator.isRunning)")
+        
+        print("Expression: \(Int(scrollView.contentOffset.x.rounded()) % Int((cellWidth + lineSpacing).rounded()))")
+        if !slideAnimator.isRunning  {
+            
+            if Int(scrollView.contentOffset.x.rounded()) % Int((cellWidth + lineSpacing).rounded()) == 0 {
+                print("hap")
+                
+                let generator = UIImpactFeedbackGenerator(style: .light)
+                generator.impactOccurred()
+                
+            }
+        }
+        
+        if isHyperScrolling && (targetPoint.x - scrollView.contentOffset.x).abs < 50 {
             stopDeceleration(for: scrollView)
+            print("hyper Start: \(animCount)")
+            animCount += 1
             startSlideAnimation()
         }
     }

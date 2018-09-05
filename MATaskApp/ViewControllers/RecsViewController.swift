@@ -28,8 +28,7 @@ class RecsViewController: UIViewController {
     
     func configure() {
         //movieCollectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.identifier)
-        movieCollectionView.movieItems = DBController.prepareData(for: moviesCount)
-        movieCollectionView.configure()
+        movieCollectionView.configure(movieItems: DBController.prepareData(for: moviesCount))
     }
     
 
