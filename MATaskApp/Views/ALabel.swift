@@ -67,6 +67,8 @@ class ALabel: UILabel, Animatable {
     private var selectAnimator = UIViewPropertyAnimator()
     private var deselectAnimator = UIViewPropertyAnimator()
     
+    private var endAnimators = [UIViewPropertyAnimator]()
+    
     var timer = Timer()
     
     func configureY() { //1!
@@ -154,15 +156,15 @@ class ALabel: UILabel, Animatable {
     func endAnimate() {
         let endY = animY
         let roadY = endY - startY
-        var gDur: CGFloat = 0.4
+        let gDur: CGFloat = 0.2
+        endAnimators = [UIViewPropertyAnimator]()
         
-        
-        var endAnimators = [UIViewPropertyAnimator]()
         
         switch aLabelState {
         case .selected:
             //make aception
-            updateALebel(state: .shown)
+            //updateALebel(state: .shown)
+            fallthrough
         case .shown:
             let sum3 = dM + dD + dA
             let d = roadY - sum3
@@ -175,12 +177,53 @@ class ALabel: UILabel, Animatable {
             animator.addAnimations({
                 self.alpha = 0
             }, delayFactor: delay)
+            animator.addCompletion() { position in
+                self.text = ALabelText.getTextFor(state: .hidden, tag: self.tag)
+            }
             endAnimators.append(animator)
+            fallthrough
         case .hidden:
-            
+            let sum2 = dM + dD
+            let d = roadY - sum2
+            var delay: CGFloat = 0
+            if d > 0 { // we are from top
+                delay = CGFloat(endAnimators.last!.delay + endAnimators.last!.duration)
+            }else { // we are from here
+                delay = d / roadY * gDur
+            }
+            let time = (dD + d)/roadY * gDur
+            let animator = UIViewPropertyAnimator(duration: TimeInterval(time), curve: .easeOut)
+            animator.addAnimations({
+                self.alpha = 1
+            }, delayFactor: CGFloat(delay))
+            endAnimators.append(animator)
+            fallthrough
         case .moved:
-            
+            let sum1 = dM
+            let d = roadY - sum1
+            var delay: CGFloat = 0
+            var moveY: CGFloat = dM
+            if d > 0 { // we are from top
+                delay = CGFloat(endAnimators.last!.delay + endAnimators.last!.duration)
+            }else { // we are from here
+                delay = d / roadY * gDur
+                moveY = d
+            }
+            let time = (dM + d)/roadY * gDur
+            let animator = UIViewPropertyAnimator(duration: TimeInterval(time), dampingRatio: 0.6)
+            animator.addAnimations({
+                self.transform = CGAffineTransform(translationX: 0, y: moveY - 5)
+            }, delayFactor: CGFloat(delay))
+            animator.addCompletion(){ position in
+                self.aLabelState = .hidden
+                }
+            endAnimators.append(animator)
         }
+        
+        endAnimators.map{
+            $0.startAnimation()
+        }
+        
         
         
         
@@ -188,8 +231,8 @@ class ALabel: UILabel, Animatable {
 //            self.animY = 178
 //        }
 //        backAnimator.startAnimation()
-        y = self.animY
-        timer = Timer.scheduledTimer(timeInterval: 0.0001, target:self, selector: #selector(updateProgress), userInfo: nil, repeats: true)
+       // y = self.animY
+       // timer = Timer.scheduledTimer(timeInterval: 0.0001, target:self, selector: #selector(updateProgress), userInfo: nil, repeats: true)
     }
     
     var y:CGFloat = 0
