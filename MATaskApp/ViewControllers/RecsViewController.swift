@@ -14,6 +14,7 @@ class RecsViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var wantALbel: ALabel!
     @IBOutlet weak var watchALable: ALabel!
     @IBOutlet weak var likeALabel: ALabel!
+    @IBOutlet weak var aLabelHeightConstraint: NSLayoutConstraint!
     
     let moviesCount = 20
     
@@ -33,9 +34,8 @@ class RecsViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func configure() {
-        
+        watchALable.heightConstraint = aLabelHeightConstraint
         movieCollectionView.configure(movieItems: DBController.prepareData(for: moviesCount), aLabels: [wantALbel, watchALable, likeALabel])
-        
     }
     
     

@@ -15,7 +15,7 @@ enum AnimationState {
 }
 
 protocol Animatable {
-    func animate(y: CGFloat, state: AnimationState)
+    func animate(y: CGFloat)
 }
 
 class AnimationController: NSObject {
@@ -33,7 +33,7 @@ class AnimationController: NSObject {
     var conteinerView: UIView!
     var movedImageView: UIImageView?
     var aView: AView?
-    var aLabels: [ALabel]?
+    var aLabels = [ALabel]()
     
     var panGestureRecognizer = UIPanGestureRecognizer()
     var animator = UIViewPropertyAnimator()
@@ -77,7 +77,11 @@ class AnimationController: NSObject {
         case .began:
             animationBegin(isBegin: true)
         case .changed:
+            guard max(120, min(250, recognizer.location(in: self.conteinerView!).y)) == recognizer.location(in: self.conteinerView!).y else {return}
             self.movedImageView!.transform = CGAffineTransform(translationX: 0, y: recognizer.translation(in: self.movedImageView!).y)
+            self.aLabels.map{
+                $0.animate(y: recognizer.location(in: self.conteinerView!).y)
+            }
         case .ended, .cancelled:
             let backAnimator = UIViewPropertyAnimator(duration: 0.4, dampingRatio: 0.6) {
                 self.movedImageView!.frame.origin = self.startPoint

@@ -26,6 +26,12 @@ extension CGFloat {
     var abs: CGFloat {
         return self < 0 ? -self : self
     }
+    func isIn(includingTop top: CGFloat, excludingBot bot: CGFloat) -> Bool {
+        return self >= top && self < bot ? true : false
+    }
+    func getPercentage(fromY: CGFloat, toY: CGFloat) -> CGFloat {
+        return (self - fromY) / (toY - fromY)
+    }
 }
 
 // MARK: - UIImageView
@@ -34,7 +40,7 @@ extension UIImageView{
     
     func clone(superView: UIView? = nil, startPoint: CGPoint = CGPoint()) -> UIImageView{
         
-        let locationOfCloneImageView = CGPoint(x: 0, y: 0)
+        //let locationOfCloneImageView = CGPoint(x: 0, y: 0)
         //x and y coordinates of where you want your image. (More specifically, the x and y coordinated of where you want the CENTER of your image to be)
         let cloneImageView = UIImageView(image: self.image)
         

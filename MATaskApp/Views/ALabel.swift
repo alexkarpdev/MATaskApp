@@ -9,6 +9,7 @@
 import UIKit
 
 enum ALabelState: String {
+    case moved = "moved"
     case shown = "shown"
     case hidden = "hidden"
     case selected = "selected"
@@ -24,7 +25,7 @@ enum ALabelState: String {
 }
 struct ALabelText {
     
-    static let text: [String: [String]] = [ALabelState.shown.rawValue: ["Want", "Watched", "Don't like this"],
+    private static let text: [String: [String]] = [ALabelState.shown.rawValue: ["Want", "Watched", "Don't like this"],
                                            ALabelState.hidden.rawValue: ["shown","shown", ""]]
     
     static func getTextFor( state: ALabelState, tag: Int) -> String {
@@ -34,69 +35,120 @@ struct ALabelText {
 
 class ALabel: UILabel, Animatable {
     
-    var maxY:CGFloat = 0
-    var appearY:CGFloat = 0
+    var heightConstraint = NSLayoutConstraint()
     
-    var selectedYMin: CGFloat {
-        return 0 * CGFloat(tag)
-    }
-    var selectedYMax: CGFloat {
-        return 0 * CGFloat(tag)
-    }
+    var startY: CGFloat = 0
+    private var topBorderY: CGFloat = 0
+    private var topMoveY: CGFloat = 5
+    private var botMoveY: CGFloat = 20
+    private var disappearY: CGFloat = 40
+    private var appearY: CGFloat = 70
+    private var topSelectY: CGFloat = 0
+    private var botSelectY: CGFloat = 0
+    private var botBorderY: CGFloat = 140
+
+    private let startHeight: CGFloat = 25
     
-    let startHeight: CGFloat = 0
-    let startY: CGFloat = 0
+    private var aLabelState: ALabelState = .hidden
     
-    var aLabelState: ALabelState = .hidden
+    private var moveAnimator = UIViewPropertyAnimator()
+    private var disappearAnimator = UIViewPropertyAnimator()
+    private var appearAnimator = UIViewPropertyAnimator()
+    private var selectAnimator = UIViewPropertyAnimator()
+    private var deselectAnimator = UIViewPropertyAnimator()
     
-    
-    func animate(y: CGFloat, state: AnimationState) {
+    func configureY() {
+        topBorderY += startY
+        topMoveY += startY
+        botMoveY += startY
+        disappearY += startY
+        appearY += startY
         
-        if y > appearY {
+        topSelectY = appearY + 10 + 30 * CGFloat(tag)
+        botSelectY = topSelectY + 20
+        
+        botBorderY += startY
+    }
+    
+    func configureAnimators() {
+        moveAnimator = UIViewPropertyAnimator(duration: 1, curve: .easeOut, animations: {
+            self.transform = CGAffineTransform(translationX: 0, y: self.botMoveY - self.topMoveY)
+        })
+        moveAnimator.startAnimation()
+        moveAnimator.pauseAnimation()
+        
+        disappearAnimator = UIViewPropertyAnimator(duration: 1, curve: .easeOut, animations: {
+            self.alpha = 0
+        })
+        disappearAnimator.startAnimation()
+        disappearAnimator.pauseAnimation()
+        
+        appearAnimator = UIViewPropertyAnimator(duration: 1, curve: .easeOut, animations: {
+            self.alpha = 1
+        })
+        appearAnimator.startAnimation()
+        appearAnimator.pauseAnimation()
+        
+        selectAnimator = UIViewPropertyAnimator(duration: 1, curve: .easeOut, animations: {
+            self.textColor = self.aLabelState.textColor
+        })
+        selectAnimator.startAnimation()
+        selectAnimator.pauseAnimation()
+        
+        deselectAnimator = UIViewPropertyAnimator(duration: 1, curve: .easeOut, animations: {
+            self.textColor = self.aLabelState.textColor
+        })
+        deselectAnimator.startAnimation()
+        deselectAnimator.pauseAnimation()
+        
+    }
+    
+    func animate(y: CGFloat) {
+        
+        if y.isIn(includingTop: topMoveY, excludingBot: botMoveY) {
+            updateALebel(state: .moved)
+            moveAnimator.fractionComplete = y.getPercentage(fromY: startY, toY: botMoveY)
+        }
+        
+        if y.isIn(includingTop: botMoveY, excludingBot: disappearY) {
+            updateALebel(state: .hidden)
+            disappearAnimator.fractionComplete = y.getPercentage(fromY: botMoveY, toY: disappearY)
+        }
+        
+        if y.isIn(includingTop: disappearY, excludingBot: appearY) {
             updateALebel(state: .shown)
-            if y > selectedYMin && y < selectedYMax {
+            appearAnimator.fractionComplete = y.getPercentage(fromY: disappearY, toY: appearY)
+        }
+        
+        if aLabelState == .shown || aLabelState == .selected{
+            if y.isIn(includingTop: topSelectY, excludingBot: botSelectY) {
                 updateALebel(state: .selected)
             }else{
                 updateALebel(state: .shown)
             }
-        }else{
-            updateALebel(state: .hidden)
-        }
-        
-        
-        
-        layoutIfNeeded()
-        switch state {
-        case .moving:
-            ()
-        case .goback:
-            ()
         }
     }
     
     func updateALebel(state: ALabelState) {
         guard aLabelState != state else {return}
         aLabelState = state
-        if state == .selected {
-            alpha = 0.65
-        }else{
-            alpha = 0.3
-        text = ALabelText.getTextFor(state: state, tag: tag)
+        switch aLabelState {
+        case .moved:
+            ()
+        case .hidden:
+            text = ALabelText.getTextFor(state: state, tag: tag)
+        case .shown:
+            text = ALabelText.getTextFor(state: state, tag: tag)
+        case .selected:
+            ()
         }
         
-        if tag == 0 && state == .hidden {
-            alpha = 0.65
-        }
-        
+    }
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        configure()()
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     func configure() {
         

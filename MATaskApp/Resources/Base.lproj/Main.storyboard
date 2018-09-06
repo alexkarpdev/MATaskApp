@@ -160,6 +160,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="aLabelHeightConstraint" destination="BGM-mX-jwD" id="zGr-HX-bhn"/>
                         <outlet property="likeALabel" destination="QTU-g0-UWL" id="O6w-Ig-Wg8"/>
                         <outlet property="movieCollectionView" destination="mGU-09-rqa" id="cA5-js-7Dp"/>
                         <outlet property="wantALbel" destination="U8z-q3-QTK" id="NCa-5a-WRt"/>
