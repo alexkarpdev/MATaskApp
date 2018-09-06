@@ -9,79 +9,81 @@
 import Foundation
 import UIKit
 
-enum AnimationType {
-    case moveOut
-    case moveIn
-    case goBack
+enum AnimationState {
+    case moving
+    case goback
 }
 
 protocol Animatable {
-    func animate()
+    func animate(y: CGFloat, state: AnimationState)
 }
-
-
 
 class AnimationController: NSObject {
     
     var cellImageView: UIImageView? {
-        willSet{
-            cellImageView?.alpha = 1
-        }
         didSet {
-            movedImageView?.removeFromSuperview()
-            cellImageView!.addGestureRecognizer(panGestureRecognizer)
-            
+            cellImageView?.addGestureRecognizer(panGestureRecognizer)
         }
     }
+    var cellPanelView: UIView?
+    
     var lockScroll: ((Bool)->())!
     var isAnimating = false
-    var movedImageView: UIImageView?
     
-    var viewConteiner: UIView!
+    var conteinerView: UIView!
+    var movedImageView: UIImageView?
+    var aView: AView?
+    var aLabels: [ALabel]?
+    
     var panGestureRecognizer = UIPanGestureRecognizer()
     var animator = UIViewPropertyAnimator()
     
     var startPoint = CGPoint()
     
-    func prepareImageView(){
-        movedImageView = cellImageView!.clone(superView: viewConteiner, startPoint: startPoint)
-        cellImageView!.alpha = 0
-        movedImageView!.addGestureRecognizer(panGestureRecognizer)
-        isAnimating = true
-        lockScroll(true)
-    }
-    func turnStateBack(){
-        movedImageView?.removeFromSuperview()
-        movedImageView = nil
-        cellImageView!.addGestureRecognizer(panGestureRecognizer)
-        cellImageView!.alpha = 1
-        isAnimating = false
-        lockScroll(false)
-    }
-    
-    
-    init(collectionView: MoviesCollectionView, lockScroll: @escaping (Bool)->()) {
+    init(collectionView: MoviesCollectionView, aLabels: [ALabel],  lockScroll: @escaping (Bool)->()) {
         super.init()
-        panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan(recognizer:)))
-        panGestureRecognizer.delegate = self
-        viewConteiner = collectionView.superview!
+        self.aLabels = aLabels
+        conteinerView = collectionView.superview!
         startPoint = CGPoint(x: collectionView.leftSectionInset, y: collectionView.frame.origin.y)
         self.lockScroll = lockScroll
+        panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan(recognizer:)))
+        panGestureRecognizer.delegate = self
     }
+
+    
+    func animationBegin(isBegin: Bool) {
+        if isBegin {
+            movedImageView = cellImageView!.clone(superView: conteinerView, startPoint: startPoint)
+            movedImageView!.addGestureRecognizer(panGestureRecognizer)
+            //aView = cellPanelView as! AView
+        }else{
+            movedImageView?.removeFromSuperview()
+            movedImageView = nil
+            cellImageView!.addGestureRecognizer(panGestureRecognizer)
+            //aView!.removeFromSuperview()
+        }
+        cellImageView!.isHidden = isBegin
+        cellPanelView!.isHidden = isBegin
+        lockScroll(isBegin)
+        UISelectionFeedbackGenerator().selectionChanged()
+    }
+    
+    
+    
     
     @objc func handlePan(recognizer: UIPanGestureRecognizer) {
         guard recognizer.numberOfTouches < 2 else { return }
         switch recognizer.state {
         case .began:
-            prepareImageView()
+            animationBegin(isBegin: true)
         case .changed:
             self.movedImageView!.transform = CGAffineTransform(translationX: 0, y: recognizer.translation(in: self.movedImageView!).y)
-        case .ended:
-            let backAnimator = UIViewPropertyAnimator(duration: 0.5, dampingRatio: 0.6) {
+        case .ended, .cancelled:
+            let backAnimator = UIViewPropertyAnimator(duration: 0.4, dampingRatio: 0.6) {
                 self.movedImageView!.frame.origin = self.startPoint
             }
             backAnimator.addCompletion(){ position in
-                self.turnStateBack()
+                self.animationBegin(isBegin: false)
             }
             backAnimator.isUserInteractionEnabled = false
             backAnimator.startAnimation()

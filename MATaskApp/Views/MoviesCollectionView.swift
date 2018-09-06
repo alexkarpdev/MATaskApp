@@ -16,6 +16,16 @@ class MoviesCollectionView: UICollectionView {
     private var movieItems = [MovieItem]() {
         didSet {
             self.reloadData()
+            if didStoppingCellNumber == -1 {
+                performBatchUpdates(nil, completion: {
+                    (result) in
+                    if result {
+                        self.didStoppingCellNumber = 0
+                        self.assignCellForAnimating(for: 0)
+                        print("test")
+                    }
+                })
+            }
         }
     }
     
@@ -24,7 +34,7 @@ class MoviesCollectionView: UICollectionView {
     private var targetPoint = CGPoint()
     private var isHyperScrolling = false
     private var slideAnimator = UIViewPropertyAnimator()
-    private var didStoppingCellNumber: Int = 0
+    private var didStoppingCellNumber: Int = -1
     private var animationController: AnimationController!
     
     public let leftSectionInset: CGFloat = 25.0
@@ -42,9 +52,16 @@ class MoviesCollectionView: UICollectionView {
     
     public func configure(movieItems: [MovieItem]) {
         self.movieItems = movieItems
-        animationController = AnimationController(collectionView: self) { [unowned self] isLock in
+        animationController = AnimationController(collectionView: self, aLabels: [ALabel]()) { [unowned self] isLock in
             self.isScrollEnabled = !isLock
         }
+        
+    }
+    
+    func assignCellForAnimating(for number:Int) {
+        let movieCell = cellForItem(at: IndexPath(row: number, section: 0)) as! MovieCell
+        animationController.cellImageView = movieCell.posterImageView
+        animationController.cellPanelView = movieCell.panelView
     }
     
     override func layoutSubviews() {
@@ -65,6 +82,7 @@ extension MoviesCollectionView: UICollectionViewDataSource {
         movieCell.configure(from: movieItems[indexPath.row])
         return movieCell
     }
+
 }
 
 // MARK: - Delegate
@@ -126,15 +144,14 @@ extension MoviesCollectionView {
         isHyperScrolling = false
         let toPoint = CGPoint(x: nextNumber * Int(cellWidth + lineSpacing), y: 0)
         
-        slideAnimator = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut, animations: {
+        slideAnimator = UIViewPropertyAnimator(duration: 0.2, curve: .easeInOut, animations: {
             self.contentOffset = toPoint
         })
         slideAnimator.addCompletion(){ position in
             if position == .end {
                 self.animationController.panGestureRecognizer.isEnabled = true
-                self.animationController.cellImageView = (self.cellForItem(at: IndexPath(row: nextNumber, section: 0)) as! MovieCell).posterImageView
-                let generator = UIImpactFeedbackGenerator(style: .medium)
-                generator.impactOccurred()
+                self.assignCellForAnimating(for: nextNumber)
+                UISelectionFeedbackGenerator().selectionChanged()
                 self.didStoppingCellNumber = self.calculateWillStoppingCellNumber()
             }
         }

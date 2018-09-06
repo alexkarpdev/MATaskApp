@@ -16,6 +16,7 @@ class MovieCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var homeImageView: UIImageView!
     @IBOutlet weak var ticketImageView: UIImageView!
+    @IBOutlet weak var panelView: UIView!
     
     func configure(from movieItem: MovieItem) {
         posterImageView.image = movieItem.image
