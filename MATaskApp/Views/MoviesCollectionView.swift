@@ -40,9 +40,9 @@ class MoviesCollectionView: UICollectionView {
         self.dataSource = self
     }
     
-    public func configure(movieItems: [MovieItem]) {
+    public func configure(movieItems: [MovieItem], aLabels: [ALabel]) {
         self.movieItems = movieItems
-        animationController = AnimationController(collectionView: self, aLabels: [ALabel]()) { [unowned self] isLock in
+        animationController = AnimationController(collectionView: self, aLabels: aLabels) { [unowned self] isLock in
             self.isScrollEnabled = !isLock
         }
         
