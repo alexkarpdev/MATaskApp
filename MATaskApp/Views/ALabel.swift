@@ -54,17 +54,18 @@ class ALabel: UILabel, Animatable {
     private var botSelectY: CGFloat = 0
     private var botBorderY: CGFloat = 140
     
+    private var dM: CGFloat = 0
+    private var dD: CGFloat = 0
+    private var dA: CGFloat = 0
+    
     private let startHeight: CGFloat = 25
     
     private var aLabelState: ALabelState = .hidden
     
     private var moveAnimator = UIViewPropertyAnimator()
-    private var disappearAnimator = UIViewPropertyAnimator()
     private var appearAnimator = UIViewPropertyAnimator()
     private var selectAnimator = UIViewPropertyAnimator()
     private var deselectAnimator = UIViewPropertyAnimator()
-    
-    private var backAnimator = UIViewPropertyAnimator()
     
     var timer = Timer()
     
@@ -79,21 +80,20 @@ class ALabel: UILabel, Animatable {
         botSelectY = topSelectY + 20
         
         botBorderY += startY
+        
+        dM = botMoveY - topMoveY
+        dD = disappearY - botMoveY
+        dA = appearY - disappearY
     }
     
     func configureAnimators() {
+        
         moveAnimator = UIViewPropertyAnimator(duration: 1, curve: .easeOut, animations: {
             self.transform = CGAffineTransform(translationX: 0, y: self.botMoveY - self.topMoveY)
         })
         moveAnimator.startAnimation()
         moveAnimator.pauseAnimation()
         
-        //        disappearAnimator = UIViewPropertyAnimator(duration: 1, curve: .easeOut, animations: {
-        //            self.alpha = 0
-        //        })
-        //        //disappearAnimator.startAnimation()
-        //        //disappearAnimator.pauseAnimation()
-        //        self.alpha = 1
         appearAnimator = UIViewPropertyAnimator(duration: 0.1, curve: .easeOut, animations: {
             self.alpha = 0
         })
@@ -111,10 +111,7 @@ class ALabel: UILabel, Animatable {
         })
         deselectAnimator.startAnimation()
         deselectAnimator.pauseAnimation()
-        
-        backAnimator = UIViewPropertyAnimator(duration: 0.2, dampingRatio: 0.6) {
-            self.transform = CGAffineTransform(translationX: 0, y:  self.topMoveY - self.botMoveY)
-        }
+
     }
     
     func animate(y: CGFloat) {
@@ -143,27 +140,47 @@ class ALabel: UILabel, Animatable {
             if y.isIn(includingTop: topSelectY, excludingBot: botSelectY) {
                 self.textColor = self.aLabelState.textColor
                 updateALebel(state: .selected)
-                selectAnimator.fractionComplete = y.getPercentage(fromY: topSelectY, toY: botSelectY)
+                //selectAnimator.fractionComplete = y.getPercentage(fromY: topSelectY, toY: botSelectY)
                 print("animate select y: \(y)")
             }else{
                 self.textColor = self.aLabelState.textColor
                 updateALebel(state: .shown)
-                deselectAnimator.fractionComplete = y.getPercentage(fromY: topSelectY, toY: botSelectY)
+                //deselectAnimator.fractionComplete = y.getPercentage(fromY: topSelectY, toY: botSelectY)
                 print("animate deselect y: \(y)")
             }
         }
     }
     
     func endAnimate() {
+        let endY = animY
+        let roadY = endY - startY
+        var gDur: CGFloat = 0.4
         
         
+        var endAnimators = [UIViewPropertyAnimator]()
         
-        let alphaChange = UIViewPropertyAnimator(duration: 0.3, dampingRatio: 0.6, animations: { [unowned self] in
-            self.animY = 178
-        })
-        
-        // To run an animation
-        alphaChange.startAnimation()
+        switch aLabelState {
+        case .selected:
+            //make aception
+            updateALebel(state: .shown)
+        case .shown:
+            let sum3 = dM + dD + dA
+            let d = roadY - sum3
+            var delay: CGFloat = 0
+            if d > 0 { // this means that endAnimation must wait before movedIV.y reached appearY
+                delay = d / roadY * gDur
+            }
+            let time = (dA + d)/roadY * gDur
+            let animator = UIViewPropertyAnimator(duration: TimeInterval(time), curve: .easeOut)
+            animator.addAnimations({
+                self.alpha = 0
+            }, delayFactor: delay)
+            endAnimators.append(animator)
+        case .hidden:
+            
+        case .moved:
+            
+        }
         
         
         
@@ -180,7 +197,6 @@ class ALabel: UILabel, Animatable {
     @objc func updateProgress() {
         guard y >= botMoveY else {
             timer.invalidate()
-            backAnimator.startAnimation()
             return
         }
         y -= 2
