@@ -35,7 +35,12 @@ class RecsViewController: UIViewController, UIGestureRecognizerDelegate {
     
     func configure() {
         watchALable.heightConstraint = aLabelHeightConstraint
-        movieCollectionView.configure(movieItems: DBController.prepareData(for: moviesCount), aLabels: [wantALbel, watchALable, likeALabel])
+        let aLabels: [ALabel] = [wantALbel, watchALable, likeALabel]
+        aLabels.map {
+            $0.startY = self.movieCollectionView.frame.origin.y
+            $0.configure()
+        }
+        movieCollectionView.configure(movieItems: DBController.prepareData(for: moviesCount), aLabels: aLabels)
     }
     
     

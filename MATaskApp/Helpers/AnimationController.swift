@@ -77,12 +77,16 @@ class AnimationController: NSObject {
         case .began:
             animationBegin(isBegin: true)
         case .changed:
-            guard max(120, min(250, recognizer.location(in: self.conteinerView!).y)) == recognizer.location(in: self.conteinerView!).y else {return}
+            //guard max(178, min(360, recognizer.location(in: self.conteinerView!).y)) == recognizer.location(in: self.conteinerView!).y else {return}
             self.movedImageView!.transform = CGAffineTransform(translationX: 0, y: recognizer.translation(in: self.movedImageView!).y)
             self.aLabels.map{
-                $0.animate(y: recognizer.location(in: self.conteinerView!).y)
+                $0.animY = self.movedImageView!.frame.origin.y//animate(y: self.movedImageView!.frame.origin.y)
             }
         case .ended, .cancelled:
+            print("end")
+            self.aLabels.map{
+                $0.endAnimate()
+            }
             let backAnimator = UIViewPropertyAnimator(duration: 0.4, dampingRatio: 0.6) {
                 self.movedImageView!.frame.origin = self.startPoint
             }
@@ -91,6 +95,8 @@ class AnimationController: NSObject {
             }
             backAnimator.isUserInteractionEnabled = false
             backAnimator.startAnimation()
+
+            
         default:
             ()
         }
@@ -98,10 +104,6 @@ class AnimationController: NSObject {
     
     
 }
-
-
-
-
 
 extension AnimationController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {

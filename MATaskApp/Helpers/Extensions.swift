@@ -32,6 +32,7 @@ extension CGFloat {
     func getPercentage(fromY: CGFloat, toY: CGFloat) -> CGFloat {
         return (self - fromY) / (toY - fromY)
     }
+    
 }
 
 // MARK: - UIImageView
