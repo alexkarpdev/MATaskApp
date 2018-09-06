@@ -66,8 +66,8 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="46" id="3xL-th-SPo"/>
                                                         <constraint firstItem="MhQ-Fe-4x2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Qb5-VW-Xc7" secondAttribute="trailing" constant="7" id="9hY-sS-GxS"/>
+                                                        <constraint firstAttribute="height" constant="46" id="DuW-3j-3TJ"/>
                                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Qb5-VW-Xc7" secondAttribute="bottom" id="Q9X-ko-c7T"/>
                                                         <constraint firstItem="fVX-i0-bdB" firstAttribute="top" secondItem="Fnw-gp-39e" secondAttribute="top" constant="13" id="QUQ-if-Lna"/>
                                                         <constraint firstItem="Qb5-VW-Xc7" firstAttribute="leading" secondItem="Fnw-gp-39e" secondAttribute="leading" id="bqM-AU-gMc"/>

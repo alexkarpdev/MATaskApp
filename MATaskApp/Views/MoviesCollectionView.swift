@@ -15,17 +15,7 @@ class MoviesCollectionView: UICollectionView {
     }
     private var movieItems = [MovieItem]() {
         didSet {
-            self.reloadData()
-            if didStoppingCellNumber == -1 {
-                performBatchUpdates(nil, completion: {
-                    (result) in
-                    if result {
-                        self.didStoppingCellNumber = 0
-                        self.assignCellForAnimating(for: 0)
-                        print("test")
-                    }
-                })
-            }
+            reloadData()
         }
     }
     
@@ -107,7 +97,22 @@ extension MoviesCollectionView: UICollectionViewDelegateFlowLayout {
         collectionViewFlowLayout.sectionInset = edgeInsets
         return edgeInsets
     }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if didStoppingCellNumber == -1 {
+            performBatchUpdates({self.reloadSections([0])}, completion: {
+                (result) in
+                if result {
+                    self.didStoppingCellNumber = 0
+                    self.assignCellForAnimating(for: 0)
+                    print("test")
+                }
+            })
+        }
+    }
 }
+
+
 
 // MARK: - Slide animation
 
