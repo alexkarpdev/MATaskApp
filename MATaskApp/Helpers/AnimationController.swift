@@ -147,7 +147,7 @@ class AnimationController: NSObject {
             }
             
             let panelAnimator = UIViewPropertyAnimator(duration: 0.2, dampingRatio: 0.5)
-            panelAnimator.addAnimations ({  [unowned self] in
+            panelAnimator.addAnimations ({ [unowned self] in
                 self.cellPanelView?.frame.origin.y = self.movedImageView.frame.height
                 self.cellPanelView?.alpha = 1
                 }, delayFactor: 0.2)

@@ -36,8 +36,8 @@ class MoviesCollectionView: UICollectionView {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.delegate = self
-        self.dataSource = self
+        delegate = self
+        dataSource = self
     }
     
     public func configure(movieItems: [MovieItem], aLabels: [ALabel]) {
@@ -102,7 +102,7 @@ extension MoviesCollectionView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if didStoppingCellNumber == -1 {
-            performBatchUpdates({self.reloadSections([0])}, completion: {
+            performBatchUpdates({[unowned self] in self.reloadSections([0])}, completion: { [unowned self]
                 (result) in
                 if result {
                     self.didStoppingCellNumber = 0
@@ -151,7 +151,7 @@ extension MoviesCollectionView {
         isHyperScrolling = false
         let toPoint = CGPoint(x: nextNumber * Int(cellWidth + lineSpacing), y: 0)
         
-        slideAnimator = UIViewPropertyAnimator(duration: 0.2, curve: .easeInOut, animations: {
+        slideAnimator = UIViewPropertyAnimator(duration: 0.2, curve: .easeInOut, animations: { [unowned self] in
             self.contentOffset = toPoint
         })
         slideAnimator.addCompletion(){ position in

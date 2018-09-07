@@ -92,7 +92,7 @@ class ALabel: UILabel, Animatable {
         appearAnimator = UIViewPropertyAnimator(duration: 0.2, curve: .easeIn, animations: { [unowned self] in
             self.alpha = self.tag > 2 ? 0 : 1
         })
-        appearAnimator.addCompletion { (position) in
+        appearAnimator.addCompletion { [unowned self] (position) in
             self.alpha = self.tag > 2 ? 1 : 0
         }
         appearAnimator.scrubsLinearly = false
@@ -183,12 +183,12 @@ class ALabel: UILabel, Animatable {
             ()
         }
         
-        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.1, delay: 0.0, options: [.curveEaseIn], animations: {
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.1, delay: 0.0, options: [.curveEaseIn], animations: { [unowned self] in
             if self.tag <= 2 { self.alpha = 0 } //hide menu
         }) { (position) in
-            UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.1, delay: 0.0, options: [.curveEaseIn], animations: {
+            UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.1, delay: 0.0, options: [.curveEaseIn], animations: { [unowned self] in
                 if self.tag > 2 { self.alpha = 1 } //show caption
-            }, completion: { (position) in
+            }, completion: { [unowned self] (position) in
                 //self.appearAnimator.stopAnimation(true)
                 //self.appearAnimator.finishAnimation(at: .end)
                 //self.configureAnimators()

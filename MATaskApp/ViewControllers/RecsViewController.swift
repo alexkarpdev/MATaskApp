@@ -19,18 +19,21 @@ class RecsViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var nextLabel: ALabel!
     @IBOutlet weak var arButton: UIButton!
     
-    let moviesCount = 20
+    private let moviesCount = 20
+    private var isApearing = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
-        
+        view.alpha = 0
         // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         animateArButton()
+        if isApearing {appearingAnimation()}
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,9 +64,14 @@ class RecsViewController: UIViewController, UIGestureRecognizerDelegate {
         arButton.layer.add(flash, forKey: nil)
     }
     
+    func appearingAnimation() {
+        isApearing = true
+        UIViewPropertyAnimator(duration: 3, dampingRatio: 0.6) { [unowned self] in
+            self.view.alpha = 1
+        }.startAnimation()
+    }
     
     
-
     /*
     // MARK: - Navigation
 

@@ -31,7 +31,7 @@ class FirstViewController: UIViewController {
     }
     
     func animation() {
-        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 1, delay: 0, options: [.curveEaseIn], animations: {
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 1, delay: 0, options: [.curveEaseIn], animations: { [unowned self] in
             self.logoImageView.alpha = 0
         }) { [unowned self] (position) in
             self.performSegue(withIdentifier: "next", sender: nil)
