@@ -29,8 +29,8 @@ class DBController {
             let val = 10.rnd
             return MovieItem(title: titles[titles.count.rnd],
                              image: posterImages[posterImages.count.rnd],
-                             isHome: val > 8,
-                             isTicket: val > 6)
+                             isHome: val > 6,
+                             isTicket: val > 4)
         }
     }
     

@@ -34,11 +34,12 @@ class ALabel: UILabel, Animatable {
     
     var animY: CGFloat = 0{
         didSet {
-            self.animate(y: animY)
+            //self.animate(y: animY)
         }
     }
     
     var allowTransform = true
+    var safedTransform: CGAffineTransform!
     
     private var topBorderY: CGFloat = 0
     private var topMoveY: CGFloat = 5
@@ -61,7 +62,14 @@ class ALabel: UILabel, Animatable {
     private var selectAnimator = UIViewPropertyAnimator()
     private var deselectAnimator = UIViewPropertyAnimator()
     
+    var isSelected: Bool = false
+    
     //private var endAnimators = [UIViewPropertyAnimator]()
+    
+    func configureState() {
+        alpha = tag > 2 ? 1 : 0
+        print("configureState tag: \(tag) alpha: \(alpha)")
+    }
     
     func configureY() { //1!
         topBorderY += startY
@@ -81,15 +89,19 @@ class ALabel: UILabel, Animatable {
     }
     
     func configureAnimators() {
-        appearAnimator = UIViewPropertyAnimator(duration: 0.2, curve: .easeIn, animations: {
+        appearAnimator = UIViewPropertyAnimator(duration: 0.2, curve: .easeIn, animations: { [unowned self] in
             self.alpha = self.tag > 2 ? 0 : 1
         })
+        appearAnimator.addCompletion { (position) in
+            self.alpha = self.tag > 2 ? 1 : 0
+        }
         appearAnimator.scrubsLinearly = false
         appearAnimator.startAnimation()
         appearAnimator.pauseAnimation()
     }
     
     func animate(y: CGFloat) {
+        print("animated tag: \(tag)")
         if y.isIn(includingTop: topMoveY, excludingBot: botMoveY) {
             updateALebel(state: .moved)
             allowTransform = true
@@ -99,36 +111,58 @@ class ALabel: UILabel, Animatable {
         
         if y.isIn(includingTop: botMoveY, excludingBot: disappearY) { //disappear -> 100
             if tag > 2 {
-                updateALebel(state: .hidden)
-                appearAnimator.fractionComplete = y.getPercentage(fromY: botMoveY, toY: disappearY)
+                //updateALebel(state: .hidden)
+                //appearAnimator.fractionComplete = y.getPercentage(fromY: botMoveY, toY: disappearY)
+                alpha = 1-y.getPercentage(fromY: botMoveY, toY: disappearY)
                 print("animate disappear yp: \(y.getPercentage(fromY: botMoveY, toY: disappearY))")
+                print("per: \(y.getPercentage(fromY: botMoveY, toY: disappearY)) alpha: \(alpha) tag: \(tag)")
             }else{
-                appearAnimator.fractionComplete = 0
+                alpha = 0 //y.getPercentage(fromY: botMoveY, toY: disappearY)
+                print("per: \(y.getPercentage(fromY: botMoveY, toY: disappearY)) alpha: \(alpha) tag: \(tag)")
             }
         }
         
         if y.isIn(includingTop: disappearY, excludingBot: appearY){ //appear -> 0
-            if tag < 3 {
-                updateALebel(state: .shown)
-                appearAnimator.fractionComplete = y.getPercentage(fromY: disappearY, toY: appearY)
+            if tag > 2 {
+                //updateALebel(state: .shown)
+                //appearAnimator.fractionComplete = y.getPercentage(fromY: disappearY, toY: appearY)
+                alpha = 0//1 - y.getPercentage(fromY: disappearY, toY: appearY)
                 print("animate appear yp: \(y.getPercentage(fromY: disappearY, toY: appearY))")
+                print("per: \(y.getPercentage(fromY: disappearY, toY: appearY)) alpha: \(alpha) tag: \(tag)")
             }else{
-                appearAnimator.fractionComplete = 1
+                
+                alpha = y.getPercentage(fromY: disappearY, toY: appearY)
+                print("per: \(y.getPercentage(fromY: disappearY, toY: appearY)) alpha: \(alpha) tag: \(tag)")
             }
         }
         
-        if aLabelState == .shown || aLabelState == .selected{
+        if y < botMoveY && tag > 2 {
+            alpha = 1
+        }
+
+        if y < botMoveY && tag < 3 {
+            alpha = 0
+        }
+
+        if y > appearY && tag > 2 {
+            alpha = 0
+        }
+
+        if y > appearY && tag < 3 {
+            alpha = 1
+        }
+        
+        if tag < 3 {
             if y.isIn(includingTop: topSelectY, excludingBot: botSelectY) {
                 updateALebel(state: .selected)
-                print("animate select y: \(y)")
             }else{
                 updateALebel(state: .shown)
-                print("animate deselect y: \(y)")
             }
         }
     }
     
     func endAnimate() {
+        print("end animated tag: \(tag)")
         textColor = tag == 12 ? ALabelState.selected.textColor : ALabelState.shown.textColor
         switch aLabelState {
         case .selected:
@@ -155,14 +189,17 @@ class ALabel: UILabel, Animatable {
             UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.1, delay: 0.0, options: [.curveEaseIn], animations: {
                 if self.tag > 2 { self.alpha = 1 } //show caption
             }, completion: { (position) in
-                self.appearAnimator.stopAnimation(false)
-                self.appearAnimator.finishAnimation(at: .current)
-                self.configureAnimators()
+                //self.appearAnimator.stopAnimation(true)
+                //self.appearAnimator.finishAnimation(at: .end)
+                //self.configureAnimators()
             })
         }
     }
     
     func updateALebel(state: ALabelState) {
+        
+        print("updated tag: \(tag)")
+        
         guard aLabelState != state else {return}
         
         textColor = tag == 12 ? ALabelState.selected.textColor : state.textColor
@@ -185,12 +222,17 @@ class ALabel: UILabel, Animatable {
         super.init(coder: aDecoder)
         configure()
     }
+    func restoreTransform() {
+        transform = safedTransform
+    }
     
     func configure() {
+        safedTransform = transform
         turnY = frame.origin.y
         print("tY: \(turnY)  tag: \(tag)")
+        configureState()
         configureY() //1!
-        configureAnimators() //2
+        //configureAnimators() //2
     }
     
 }

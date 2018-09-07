@@ -49,6 +49,7 @@ class MoviesCollectionView: UICollectionView {
     }
     
     func assignCellForAnimating(for number:Int) {
+        print("assigned cell number: \(number)")
         if let movieCell = cellForItem(at: IndexPath(row: number, section: 0)) as! MovieCell? {
             animationController.movedImageView = movieCell.posterImageView
             animationController.cellPanelView = movieCell.panelView

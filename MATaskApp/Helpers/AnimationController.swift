@@ -48,7 +48,6 @@ class AnimationController: NSObject {
         super.init()
         self.aLabels = aLabels
         conteinerView = collectionView.superview!
-        //startPoint = CGPoint(x: collectionView.leftSectionInset, y: collectionView.frame.origin.y)
         self.lockScroll = lockScroll
         panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan(recognizer:)))
         panGestureRecognizer.delegate = self
@@ -56,20 +55,26 @@ class AnimationController: NSObject {
     
     
     func animationBegin(isBegin: Bool) {
+        print("animation begin: \(isBegin)")
         if isBegin {
+            
             //startPoint = CGPoint()
+//            aLabels.forEach{
+//                $0.safedTransform = $0.transform
+//            }
             UISelectionFeedbackGenerator().selectionChanged()
             //movedImageView = cellImageView!.clone(superView: conteinerView, startPoint: startPoint)
             //movedImageView!.addGestureRecognizer(panGestureRecognizer)
             //cellPanelView?.layer.zPosition = movedImageView!.layer.zPosition + 1
         }else{
+            //movedImageView.transform = CGAffineTransform.
             aLabels.forEach{
                 $0.animY = $0.animY + 0
-                $0.transform = CGAffineTransform.identity
-                $0.allowTransform = true
+                //$0.restoreTransform() //transform = CGAffineTransformFromString(NSStringFromCGAffineTransform($0.transform))
+                $0.allowTransform = false
             }
             
-            //movedImageView.transform = CGAffineTransform.
+            
             //movedImageView?.removeFromSuperview()
             //movedImageView = nil
             //cellPanelView!.layer.zPosition = cellImageView!.layer.zPosition
@@ -81,6 +86,7 @@ class AnimationController: NSObject {
     
     @objc func handlePan(recognizer: UIPanGestureRecognizer) {
         guard recognizer.numberOfTouches < 2 else { return }
+        print("recognizer state: \(recognizer.state)")
         switch recognizer.state {
         case .began:
             
@@ -90,18 +96,22 @@ class AnimationController: NSObject {
             let shouldMovedToY = recTranslationY + movedImageView.frame.origin.y
             
             guard shouldMovedToY == max(topBorderY, min(botBorderY, shouldMovedToY)) else {return}
-            
-            movedImageView.transform = CGAffineTransform(translationX: 0, y: recTranslationY)
+            movedImageView.frame.origin.y = recTranslationY
+            //movedImageView.transform = CGAffineTransform(translationX: 0, y: recTranslationY)
             let y = self.movedImageView.frame.origin.y// - startPoint.y
             
             if y < 21 {
                 cellPanelView!.transform = CGAffineTransform(translationX: 0, y: recTranslationY * 0.3)
                 cellPanelView!.alpha = y.getPercentage(fromY: 20, toY: 0)
+            }else if y > 20{
+                cellPanelView!.alpha = 0
+            }else{
+                cellPanelView!.alpha = 1
             }
             self.aLabels.forEach{
-                $0.animY = y
+                $0.animate(y: y)
                 if $0.allowTransform {
-                    $0.transform = CGAffineTransform(translationX: 0, y: recTranslationY)
+                    $0.frame.origin.y = $0.turnY + recognizer.translation(in: conteinerView!).y// recTranslationY + $0.frame.origin.y// = CGAffineTransform(translationX: 0, y: recTranslationY)
                 }
             }
         case .ended, .cancelled:
@@ -122,6 +132,11 @@ class AnimationController: NSObject {
                 self.movedImageView.frame.origin.y = 0
             }
             let labelAnimator = UIViewPropertyAnimator(duration: 0.2, dampingRatio: 0.3)
+            labelAnimator.addAnimations { [unowned self] in
+                self.aLabels.forEach{
+                    $0.alpha = $0.tag > 2 ? 1 : 0
+                }
+            }
             labelAnimator.addAnimations ({ [unowned self] in
                 self.aLabels.forEach{
                     $0.frame.origin.y = $0.turnY

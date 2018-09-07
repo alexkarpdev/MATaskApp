@@ -30,7 +30,8 @@ extension CGFloat {
         return self >= top && self < bot ? true : false
     }
     func getPercentage(fromY: CGFloat, toY: CGFloat) -> CGFloat {
-        return (self - fromY) / (toY - fromY)
+        let p = (self - fromY) / (toY - fromY)
+        return  p > 0 ? (p < 1 ? p : 1) : 0
     }
     
 }
