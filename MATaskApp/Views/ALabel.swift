@@ -172,15 +172,18 @@ extension ALabel: Animatable {
         print("end animated tag: \(tag)")
         textColor = tag == 12 ? ALabelState.selected.textColor : ALabelState.shown.textColor
         switch aLabelState {
-        case .selected:
+        case .selected where state == .ended:
             let generator = UINotificationFeedbackGenerator()
             switch tag {
-            case 0:
+            case 0: //
                 generator.notificationOccurred(.warning)
+                //accept selection
             case 1:
                 generator.notificationOccurred(.success)
+                //accept selection
             case 2:
                 generator.notificationOccurred(.error)
+                //accept selection
             default:
                 print("wrong tag: \(tag)")
             }
