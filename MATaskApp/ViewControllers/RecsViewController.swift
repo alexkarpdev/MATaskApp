@@ -11,10 +11,12 @@ import UIKit
 class RecsViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var movieCollectionView: MoviesCollectionView!
-    @IBOutlet weak var wantALbel: ALabel!
-    @IBOutlet weak var watchALable: ALabel!
-    @IBOutlet weak var likeALabel: ALabel!
+    @IBOutlet weak var wantLabel: ALabel!
+    @IBOutlet weak var watchLable: ALabel!
+    @IBOutlet weak var likeLabel: ALabel!
     @IBOutlet weak var aLabelHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var moviesLabel: ALabel!
+    @IBOutlet weak var nextLabel: ALabel!
     
     let moviesCount = 20
     
@@ -33,13 +35,14 @@ class RecsViewController: UIViewController, UIGestureRecognizerDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+    }
+    
     func configure() {
-        watchALable.heightConstraint = aLabelHeightConstraint
-        let aLabels: [ALabel] = [wantALbel, watchALable, likeALabel]
-        aLabels.map {
-            $0.startY = self.movieCollectionView.frame.origin.y
-            $0.configure()
-        }
+        watchLable.heightConstraint = aLabelHeightConstraint
+        let aLabels: [ALabel] = [wantLabel, watchLable, likeLabel, moviesLabel, nextLabel]
         movieCollectionView.configure(movieItems: DBController.prepareData(for: moviesCount), aLabels: aLabels)
     }
     
