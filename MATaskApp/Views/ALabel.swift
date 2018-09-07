@@ -99,33 +99,29 @@ class ALabel: UILabel, Animatable {
         
         if y.isIn(includingTop: botMoveY, excludingBot: disappearY) && tag > 2 { //disappear -> 100
             updateALebel(state: .hidden)
-            appearAnimator.fractionComplete = y.getPercentage(fromY: botMoveY, toY: disappearY)//.rounded()
-            print("animate disappear y: \(y)")
+            appearAnimator.fractionComplete = y.getPercentage(fromY: botMoveY, toY: disappearY).rounded()
+            print("animate disappear yp: \(y.getPercentage(fromY: botMoveY, toY: disappearY).rounded())")
         }
         
         if y.isIn(includingTop: disappearY, excludingBot: appearY) && tag < 3{ //appear -> 0
             updateALebel(state: .shown)
-            appearAnimator.fractionComplete = y.getPercentage(fromY: disappearY, toY: appearY)//.rounded()
-            print("animate appear y: \(y)")
+            appearAnimator.fractionComplete = y.getPercentage(fromY: disappearY, toY: appearY).rounded()
+            print("animate appear yp: \(y.getPercentage(fromY: disappearY, toY: appearY).rounded())")
         }
         
         if aLabelState == .shown || aLabelState == .selected{
             if y.isIn(includingTop: topSelectY, excludingBot: botSelectY) {
-                self.textColor = self.aLabelState.textColor
                 updateALebel(state: .selected)
-                //selectAnimator.fractionComplete = y.getPercentage(fromY: topSelectY, toY: botSelectY)
                 print("animate select y: \(y)")
             }else{
-                self.textColor = self.aLabelState.textColor
                 updateALebel(state: .shown)
-                //deselectAnimator.fractionComplete = y.getPercentage(fromY: topSelectY, toY: botSelectY)
                 print("animate deselect y: \(y)")
             }
         }
     }
     
     func endAnimate() {
-        textColor = tag == 11 ? ALabelState.selected.textColor : ALabelState.shown.textColor
+        textColor = tag == 12 ? ALabelState.selected.textColor : ALabelState.shown.textColor
         switch aLabelState {
         case .selected:
             let generator = UINotificationFeedbackGenerator()
@@ -145,8 +141,6 @@ class ALabel: UILabel, Animatable {
             ()
         }
         
-        appearAnimator.stopAnimation(false)
-        
         UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.1, delay: 0.0, options: [.curveEaseIn], animations: {
             if self.tag <= 2 { self.alpha = 0 } //hide menu
         }) { (position) in
@@ -154,107 +148,25 @@ class ALabel: UILabel, Animatable {
                 if self.tag > 2 { self.alpha = 1 } //show caption
             }, completion: { (position) in
                 self.appearAnimator.stopAnimation(false)
+                self.appearAnimator.finishAnimation(at: .current)
                 self.configureAnimators()
             })
         }
-        
-        
-        //moveAnimator.isReversed = true
-        //moveAnimator.startAnimation()
-        
-//        let endY = animY
-//        let roadY = endY - startY
-//        let gDur: CGFloat = 0.2
-//        endAnimators = [UIViewPropertyAnimator]()
-//
-//
-//        switch aLabelState {
-//        case .selected:
-//            //make aception
-//            //updateALebel(state: .shown)
-//            fallthrough
-//        case .shown:
-//            let sum3 = dM + dD + dA
-//            let d = roadY - sum3
-//            var delay: CGFloat = 0
-//            if d > 0 { // this means that endAnimation must wait before movedIV.y reached appearY
-//                delay = d / roadY * gDur
-//            }
-//            let time = (dA + d)/roadY * gDur
-//            let animator = UIViewPropertyAnimator(duration: TimeInterval(time), curve: .easeOut)
-//            animator.addAnimations({
-//                self.alpha = 0
-//            }, delayFactor: delay)
-//            animator.addCompletion() { position in
-//                self.text = ALabelText.getTextFor(state: .hidden, tag: self.tag)
-//            }
-//            endAnimators.append(animator)
-//            fallthrough
-//        case .hidden:
-//            let sum2 = dM + dD
-//            let d = roadY - sum2
-//            var delay: CGFloat = 0
-//            if d > 0 { // we are from top
-//                delay = CGFloat(endAnimators.last!.delay + endAnimators.last!.duration)
-//            }else { // we are from here
-//                delay = d / roadY * gDur
-//            }
-//            let time = (dD + d)/roadY * gDur
-//            let animator = UIViewPropertyAnimator(duration: TimeInterval(time), curve: .easeOut)
-//            animator.addAnimations({
-//                self.alpha = 1
-//            }, delayFactor: CGFloat(delay))
-//            endAnimators.append(animator)
-//            fallthrough
-//        case .moved:
-//            let sum1 = dM
-//            let d = roadY - sum1
-//            var delay: CGFloat = 0
-//            var moveY: CGFloat = dM
-//            if d > 0 { // we are from top
-//                delay = CGFloat(endAnimators.last!.delay + endAnimators.last!.duration)
-//            }else { // we are from here
-//                delay = d / roadY * gDur
-//                moveY = d
-//            }
-//            let time = (dM + d)/roadY * gDur
-//            let animator = UIViewPropertyAnimator(duration: TimeInterval(time), dampingRatio: 0.6)
-//            animator.addAnimations({
-//                self.transform = CGAffineTransform(translationX: 0, y: moveY - 5)
-//            }, delayFactor: CGFloat(delay))
-//            animator.addCompletion(){ position in
-//                self.aLabelState = .hidden
-//                }
-//            endAnimators.append(animator)
-//        }
-//
-//        endAnimators.map{
-//            $0.startAnimation()
-//        }
-//
-//
-//
-//
-////        let backAnimator = UIViewPropertyAnimator(duration: 0.4, dampingRatio: 0.6) {
-////            self.animY = 178
-////        }
-////        backAnimator.startAnimation()
-
-        
     }
     
     func updateALebel(state: ALabelState) {
         guard aLabelState != state else {return}
         aLabelState = state
-        textColor = state.textColor
+        textColor = tag == 12 ? ALabelState.selected.textColor : state.textColor
         switch aLabelState {
         case .moved:
             ()
         case .hidden:
-            ()
+            ()//appearAnimator.fractionComplete = 1//tag > 2 ? 0 : 1
         case .shown:
-            ()
+            ()//appearAnimator.fractionComplete = tag > 2 ? 1 : 0
         case .selected:
+            ()//appearAnimator.fractionComplete = 1//tag > 2 ? 0 : 0
             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
         }
         

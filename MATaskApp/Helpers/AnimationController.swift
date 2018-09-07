@@ -64,10 +64,6 @@ class AnimationController: NSObject {
                 $0.animY = $0.animY + 0
                 $0.transform = CGAffineTransform.identity
                 $0.allowTransform = true
-                $0.appearAnimator.isInterruptible = true
-                $0.appearAnimator.startAnimation()
-                $0.appearAnimator.pauseAnimation()
-                
             }
             movedImageView?.removeFromSuperview()
             movedImageView = nil
@@ -113,7 +109,7 @@ class AnimationController: NSObject {
                 self.aLabels.forEach{
                     $0.frame.origin.y = $0.turnY
                 }
-            }, delayFactor: 0.1)
+            }, delayFactor: 0.2)
             
             labelAnimator.addCompletion(){ position in
                 print(position)
