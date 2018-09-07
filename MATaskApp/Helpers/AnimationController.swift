@@ -16,29 +16,27 @@ enum AnimationState {
 
 protocol Animatable {
     func animate(y: CGFloat)
+    func endAnimate(state: UIGestureRecognizerState)
 }
 
 class AnimationController: NSObject {
+    private var lockScroll: ((Bool)->())!
+    private var isAnimating = false
+    
+    private var conteinerView: UIView!
+    private var aLabels = [ALabel]()
+    
+    var panGestureRecognizer = UIPanGestureRecognizer()
     
     var movedImageView: UIImageView! {
         didSet {
             movedImageView.addGestureRecognizer(panGestureRecognizer)
             topBorderY = 0
-            botBorderY = 0 + movedImageView.frame.height
+            botBorderY = 0 + movedImageView.frame.height * 1.3
         }
     }
     var cellPanelView: UIView?
-    
-    var lockScroll: ((Bool)->())!
-    var isAnimating = false
-    
-    var conteinerView: UIView!
-    var aLabels = [ALabel]()
-    
-    var panGestureRecognizer = UIPanGestureRecognizer()
-    var animator = UIViewPropertyAnimator()
-    
-    //var startPoint = CGPoint()
+
     var topBorderY: CGFloat = 0
     var botBorderY: CGFloat = 0
     
@@ -56,39 +54,23 @@ class AnimationController: NSObject {
     func animationBegin(isBegin: Bool) {
         print("animation begin: \(isBegin)")
         if isBegin {
-            
-            //startPoint = CGPoint()
-//            aLabels.forEach{
-//                $0.safedTransform = $0.transform
-//            }
             UISelectionFeedbackGenerator().selectionChanged()
-            //movedImageView = cellImageView!.clone(superView: conteinerView, startPoint: startPoint)
-            //movedImageView!.addGestureRecognizer(panGestureRecognizer)
-            //cellPanelView?.layer.zPosition = movedImageView!.layer.zPosition + 1
+            //initialisation for start animations
         }else{
-            //movedImageView.transform = CGAffineTransform.
+            //deinit
             aLabels.forEach{
-                $0.animY = $0.animY + 0
-                //$0.restoreTransform() //transform = CGAffineTransformFromString(NSStringFromCGAffineTransform($0.transform))
+                //$0.animY = $0.animY + 0
                 $0.allowTransform = false
             }
-            
-            
-            //movedImageView?.removeFromSuperview()
-            //movedImageView = nil
-            //cellPanelView!.layer.zPosition = cellImageView!.layer.zPosition
         }
-        //cellImageView!.isHidden = isBegin
-        //cellPanelView!.isHidden = isBegin
         lockScroll(isBegin)
     }
     
     @objc func handlePan(recognizer: UIPanGestureRecognizer) {
         guard recognizer.numberOfTouches < 2 else { return }
-        print("recognizer state: \(recognizer.state)")
+        print("recognizer state: \(recognizer.state.rawValue)")
         switch recognizer.state {
         case .began:
-            
             animationBegin(isBegin: true)
         case .changed:
             let recTranslationY = recognizer.translation(in: movedImageView).y
@@ -96,11 +78,10 @@ class AnimationController: NSObject {
             
             guard shouldMovedToY == max(topBorderY, min(botBorderY, shouldMovedToY)) else {return}
             movedImageView.frame.origin.y = recTranslationY
-            //movedImageView.transform = CGAffineTransform(translationX: 0, y: recTranslationY)
-            let y = self.movedImageView.frame.origin.y// - startPoint.y
+            let y = self.movedImageView.frame.origin.y
             
-            if y < 21 {
-                cellPanelView!.transform = CGAffineTransform(translationX: 0, y: recTranslationY * 0.3)
+            if y < 21 {  //need a own AClass
+                cellPanelView!.frame.origin.y = movedImageView.frame.height + recognizer.translation(in: conteinerView!).y * 0.2
                 cellPanelView!.alpha = y.getPercentage(fromY: 20, toY: 0)
             }else if y > 20{
                 cellPanelView!.alpha = 0
@@ -108,29 +89,27 @@ class AnimationController: NSObject {
                 cellPanelView!.alpha = 1
             }
             self.aLabels.forEach{
-                $0.animate(y: y)
+                $0.animate(y: y * 0.8)
                 if $0.allowTransform {
-                    $0.frame.origin.y = $0.turnY + recognizer.translation(in: conteinerView!).y// recTranslationY + $0.frame.origin.y// = CGAffineTransform(translationX: 0, y: recTranslationY)
+                    $0.frame.origin.y = $0.turnY + recognizer.translation(in: conteinerView!).y * 0.4
                 }
             }
         case .ended, .cancelled:
             
-            //recognizer.setTranslation(CGPoint(), in: movedImageView.superview)
             print("end")
             if self.movedImageView.frame.origin.y.rounded() == 0 {
                 animationBegin(isBegin: false)
                 return
-                
             }
             
             self.aLabels.forEach{
-                $0.endAnimate()
+                $0.endAnimate(state: recognizer.state)
             }
             let backAnimator = UIViewPropertyAnimator(duration: 0.4, dampingRatio: 0.5)
             backAnimator.addAnimations { [unowned self] in
                 self.movedImageView.frame.origin.y = 0
             }
-            let labelAnimator = UIViewPropertyAnimator(duration: 0.2, dampingRatio: 0.3)
+            let labelAnimator = UIViewPropertyAnimator(duration: 0.2, dampingRatio: 0.5)
             labelAnimator.addAnimations { [unowned self] in
                 self.aLabels.forEach{
                     $0.alpha = $0.tag > 2 ? 1 : 0

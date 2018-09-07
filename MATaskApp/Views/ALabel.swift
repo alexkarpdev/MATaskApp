@@ -32,7 +32,7 @@ class ALabel: UILabel {
     private var topBorderY: CGFloat = 0
     private var topMoveY: CGFloat = 5
     private var botMoveY: CGFloat = 30
-    private var disappearY: CGFloat = 40
+    private var disappearY: CGFloat = 45
     private var appearY: CGFloat = 60
     private var topSelectY: CGFloat = 0
     private var botSelectY: CGFloat = 0
@@ -168,7 +168,7 @@ extension ALabel: Animatable {
         }
     }
     
-    func endAnimate() {
+    func endAnimate(state: UIGestureRecognizerState) {
         print("end animated tag: \(tag)")
         textColor = tag == 12 ? ALabelState.selected.textColor : ALabelState.shown.textColor
         switch aLabelState {
