@@ -17,17 +17,20 @@ class RecsViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var aLabelHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var moviesLabel: ALabel!
     @IBOutlet weak var nextLabel: ALabel!
+    @IBOutlet weak var arButton: UIButton!
     
     let moviesCount = 20
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
+        
         // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        animateArButton()
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,6 +47,18 @@ class RecsViewController: UIViewController, UIGestureRecognizerDelegate {
         watchLable.heightConstraint = aLabelHeightConstraint
         let aLabels: [ALabel] = [wantLabel, watchLable, likeLabel, moviesLabel, nextLabel]
         movieCollectionView.configure(movieItems: DBController.prepareData(for: moviesCount), aLabels: aLabels)
+    }
+    
+    func animateArButton() {
+        let flash = CABasicAnimation(keyPath: "opacity")
+        flash.duration = 2
+        flash.fromValue = 1
+        flash.toValue = 0.2
+        flash.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+        flash.autoreverses = true
+        flash.repeatCount = Float.infinity
+        
+        arButton.layer.add(flash, forKey: nil)
     }
     
     

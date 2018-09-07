@@ -15,6 +15,38 @@
         </array>
     </customFonts>
     <scenes>
+        <!--First View Controller-->
+        <scene sceneID="vHs-bw-o8u">
+            <objects>
+                <viewController id="IXf-pL-Frz" customClass="FirstViewController" customModule="MATaskApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ey3-lt-VGf">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="taskapp1024" translatesAutoresizingMaskIntoConstraints="NO" id="Z5m-FP-6yH">
+                                <rect key="frame" x="107" y="268" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="2LO-Ti-qw8"/>
+                                    <constraint firstAttribute="height" constant="200" id="Ce7-Zg-muF"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Z5m-FP-6yH" firstAttribute="centerX" secondItem="Ey3-lt-VGf" secondAttribute="centerX" id="jfn-cv-u9f"/>
+                            <constraint firstItem="Z5m-FP-6yH" firstAttribute="centerY" secondItem="Ey3-lt-VGf" secondAttribute="centerY" id="sKa-IC-bIv"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ZSW-8K-Q8V"/>
+                    </view>
+                    <connections>
+                        <outlet property="logoImageView" destination="Z5m-FP-6yH" id="rOM-yI-iJC"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="next" animates="NO" id="Ato-Yc-N5Q"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qhc-s5-EOx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-680" y="129"/>
+        </scene>
         <!--Recs View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -23,7 +55,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="mGU-09-rqa" customClass="MoviesCollectionView" customModule="MATaskApp" customModuleProvider="target">
+                            <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="mGU-09-rqa" customClass="MoviesCollectionView" customModule="MATaskApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="178" width="414" height="436"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="20" minimumInteritemSpacing="20" id="kfZ-YQ-6I6">
@@ -33,13 +65,21 @@
                                     <inset key="sectionInset" minX="25" minY="0.0" maxX="90" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MovieCell" id="Tw9-LY-gTi" customClass="MovieCell" customModule="MATaskApp" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MovieCell" id="Tw9-LY-gTi" customClass="MovieCell" customModule="MATaskApp" customModuleProvider="target">
                                         <rect key="frame" x="25" y="0.0" width="260" height="436"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="260" height="436"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zWD-Tp-L5p">
+                                                    <rect key="frame" x="0.0" y="0.0" width="260" height="390"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fnw-gp-39e">
                                                     <rect key="frame" x="0.0" y="390" width="260" height="46"/>
                                                     <subviews>
@@ -64,7 +104,7 @@
                                                             </constraints>
                                                         </imageView>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstItem="MhQ-Fe-4x2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Qb5-VW-Xc7" secondAttribute="trailing" constant="7" id="9hY-sS-GxS"/>
                                                         <constraint firstAttribute="height" constant="46" id="DuW-3j-3TJ"/>
@@ -77,14 +117,6 @@
                                                         <constraint firstItem="Qb5-VW-Xc7" firstAttribute="top" secondItem="Fnw-gp-39e" secondAttribute="top" constant="10" id="w6J-s2-hIB"/>
                                                     </constraints>
                                                 </view>
-                                                <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zWD-Tp-L5p">
-                                                    <rect key="frame" x="0.0" y="0.0" width="260" height="390"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="5"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </imageView>
                                             </subviews>
                                         </view>
                                         <constraints>
@@ -115,13 +147,13 @@
                                 <state key="normal" image="SearchIcon"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" tag="11" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next to watch" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qtQ-tP-lep" customClass="ALabel" customModule="MATaskApp" customModuleProvider="target">
-                                <rect key="frame" x="25" y="141" width="170" height="25"/>
+                                <rect key="frame" x="25" y="141" width="168.66666666666666" height="25"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="27"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" tag="12" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movies" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9BC-EZ-64Y" customClass="ALabel" customModule="MATaskApp" customModuleProvider="target">
-                                <rect key="frame" x="25" y="111" width="89" height="25"/>
+                                <rect key="frame" x="24.999999999999993" y="111" width="88.333333333333314" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="193-Yn-V46"/>
                                 </constraints>
@@ -150,6 +182,14 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9J7-bI-1ba">
+                                <rect key="frame" x="187" y="676" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Jtg-kk-Qbk"/>
+                                    <constraint firstAttribute="width" constant="40" id="SHd-Jt-TSg"/>
+                                </constraints>
+                                <state key="normal" image="ar1024"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -165,12 +205,14 @@
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9BC-EZ-64Y" secondAttribute="trailing" constant="20" symbolic="YES" id="UwX-yB-mze"/>
                             <constraint firstItem="9BC-EZ-64Y" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="25" id="VA7-Nt-fBe"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qtQ-tP-lep" secondAttribute="trailing" constant="20" symbolic="YES" id="VHj-K6-oX6"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="9J7-bI-1ba" secondAttribute="bottom" constant="20" id="Wrc-mK-QjJ"/>
                             <constraint firstItem="mGU-09-rqa" firstAttribute="top" secondItem="U8z-q3-QTK" secondAttribute="bottom" constant="42" id="aS0-FL-Gsi"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="mGU-09-rqa" secondAttribute="bottom" constant="122" id="aaI-e9-ypp"/>
                             <constraint firstItem="akM-tV-4Ei" firstAttribute="leading" secondItem="U8z-q3-QTK" secondAttribute="leading" id="b1u-Xp-FJc"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Het-sz-0iy" secondAttribute="trailing" constant="26" id="cqv-8m-hEL"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="QTU-g0-UWL" secondAttribute="trailing" id="fbh-pW-QoP"/>
                             <constraint firstItem="U8z-q3-QTK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="25" id="gZi-60-Hwh"/>
+                            <constraint firstItem="9J7-bI-1ba" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="nr9-Ub-048"/>
                             <constraint firstItem="qtQ-tP-lep" firstAttribute="height" secondItem="9BC-EZ-64Y" secondAttribute="height" id="q9C-0L-tmT"/>
                             <constraint firstItem="QTU-g0-UWL" firstAttribute="leading" secondItem="akM-tV-4Ei" secondAttribute="leading" id="qEd-W7-CJ8"/>
                             <constraint firstItem="mGU-09-rqa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="w8m-45-hr5"/>
@@ -183,6 +225,7 @@
                     </view>
                     <connections>
                         <outlet property="aLabelHeightConstraint" destination="BGM-mX-jwD" id="zGr-HX-bhn"/>
+                        <outlet property="arButton" destination="9J7-bI-1ba" id="NO3-6N-c33"/>
                         <outlet property="likeLabel" destination="QTU-g0-UWL" id="O6w-Ig-Wg8"/>
                         <outlet property="movieCollectionView" destination="mGU-09-rqa" id="cA5-js-7Dp"/>
                         <outlet property="moviesLabel" destination="9BC-EZ-64Y" id="qrd-ti-Y16"/>
@@ -200,5 +243,7 @@
         <image name="HomeIcon" width="27" height="27"/>
         <image name="SearchIcon" width="19" height="19"/>
         <image name="TicketsIcon" width="27" height="27"/>
+        <image name="ar1024" width="55" height="55"/>
+        <image name="taskapp1024" width="512" height="512"/>
     </resources>
 </document>

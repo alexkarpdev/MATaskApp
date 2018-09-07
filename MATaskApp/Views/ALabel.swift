@@ -97,16 +97,24 @@ class ALabel: UILabel, Animatable {
             allowTransform = false
         }
         
-        if y.isIn(includingTop: botMoveY, excludingBot: disappearY) && tag > 2 { //disappear -> 100
-            updateALebel(state: .hidden)
-            appearAnimator.fractionComplete = y.getPercentage(fromY: botMoveY, toY: disappearY).rounded()
-            print("animate disappear yp: \(y.getPercentage(fromY: botMoveY, toY: disappearY).rounded())")
+        if y.isIn(includingTop: botMoveY, excludingBot: disappearY) { //disappear -> 100
+            if tag > 2 {
+                updateALebel(state: .hidden)
+                appearAnimator.fractionComplete = y.getPercentage(fromY: botMoveY, toY: disappearY)
+                print("animate disappear yp: \(y.getPercentage(fromY: botMoveY, toY: disappearY))")
+            }else{
+                appearAnimator.fractionComplete = 0
+            }
         }
         
-        if y.isIn(includingTop: disappearY, excludingBot: appearY) && tag < 3{ //appear -> 0
-            updateALebel(state: .shown)
-            appearAnimator.fractionComplete = y.getPercentage(fromY: disappearY, toY: appearY).rounded()
-            print("animate appear yp: \(y.getPercentage(fromY: disappearY, toY: appearY).rounded())")
+        if y.isIn(includingTop: disappearY, excludingBot: appearY){ //appear -> 0
+            if tag < 3 {
+                updateALebel(state: .shown)
+                appearAnimator.fractionComplete = y.getPercentage(fromY: disappearY, toY: appearY)
+                print("animate appear yp: \(y.getPercentage(fromY: disappearY, toY: appearY))")
+            }else{
+                appearAnimator.fractionComplete = 1
+            }
         }
         
         if aLabelState == .shown || aLabelState == .selected{
@@ -156,9 +164,9 @@ class ALabel: UILabel, Animatable {
     
     func updateALebel(state: ALabelState) {
         guard aLabelState != state else {return}
-        aLabelState = state
+        
         textColor = tag == 12 ? ALabelState.selected.textColor : state.textColor
-        switch aLabelState {
+        switch state {
         case .moved:
             ()
         case .hidden:
@@ -169,6 +177,8 @@ class ALabel: UILabel, Animatable {
             ()//appearAnimator.fractionComplete = 1//tag > 2 ? 0 : 0
             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
         }
+        
+        aLabelState = state
         
     }
     public required init?(coder aDecoder: NSCoder) {

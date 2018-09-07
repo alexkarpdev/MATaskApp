@@ -50,7 +50,7 @@ class MoviesCollectionView: UICollectionView {
     
     func assignCellForAnimating(for number:Int) {
         if let movieCell = cellForItem(at: IndexPath(row: number, section: 0)) as! MovieCell? {
-            animationController.cellImageView = movieCell.posterImageView
+            animationController.movedImageView = movieCell.posterImageView
             animationController.cellPanelView = movieCell.panelView
         }
     }
