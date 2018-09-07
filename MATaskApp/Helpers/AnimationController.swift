@@ -33,7 +33,6 @@ class AnimationController: NSObject {
     var isAnimating = false
     
     var conteinerView: UIView!
-    var aView: AView?
     var aLabels = [ALabel]()
     
     var panGestureRecognizer = UIPanGestureRecognizer()

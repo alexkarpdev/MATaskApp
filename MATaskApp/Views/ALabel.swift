@@ -24,23 +24,11 @@ enum ALabelState: String {
     }
 }
 
-class ALabel: UILabel, Animatable {
+class ALabel: UILabel {
     
-    var heightConstraint = NSLayoutConstraint()
-    
-    var startY: CGFloat = 0
-    
-    var turnY: CGFloat = 0
-    
-    var animY: CGFloat = 0{
-        didSet {
-            //self.animate(y: animY)
-        }
+    private var isMenuLabel: Bool {
+        return tag < 3
     }
-    
-    var allowTransform = true
-    var safedTransform: CGAffineTransform!
-    
     private var topBorderY: CGFloat = 0
     private var topMoveY: CGFloat = 5
     private var botMoveY: CGFloat = 30
@@ -54,31 +42,45 @@ class ALabel: UILabel, Animatable {
     private var dD: CGFloat = 0
     private var dA: CGFloat = 0
     
-    private let startHeight: CGFloat = 25
-    
+    private var startHeight: CGFloat = 25
     private var aLabelState: ALabelState = .hidden
     
-    var appearAnimator = UIViewPropertyAnimator()
-    private var selectAnimator = UIViewPropertyAnimator()
-    private var deselectAnimator = UIViewPropertyAnimator()
+    var startY: CGFloat = 0
+    var turnY: CGFloat = 0
+    var animY: CGFloat = 0
+    var allowTransform = true
+    var heightConstraint: NSLayoutConstraint! {
+        didSet{
+            startHeight = heightConstraint.constant
+        }
+    }
     
-    var isSelected: Bool = false
     
-    //private var endAnimators = [UIViewPropertyAnimator]()
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        configure()
+    }
     
-    func configureState() {
-        alpha = tag > 2 ? 1 : 0
+    private func configure() {
+        turnY = frame.origin.y
+        print("tY: \(turnY)  tag: \(tag)")
+        configureState()
+        configureY() //1!
+    }
+    
+    private func configureState() {
+        alpha = isMenuLabel ? 0 : 1
         print("configureState tag: \(tag) alpha: \(alpha)")
     }
     
-    func configureY() { //1!
+    private func configureY() { //1!
         topBorderY += startY
         topMoveY += startY
         botMoveY += startY
         disappearY += startY
         appearY += startY
         
-        topSelectY = appearY + 5 + 20 * CGFloat(tag > 2 ? 0 : tag)
+        topSelectY = appearY + 5 + 20 * CGFloat(isMenuLabel ? tag : 0)
         botSelectY = topSelectY + 15
         
         botBorderY += startY
@@ -88,18 +90,27 @@ class ALabel: UILabel, Animatable {
         dA = appearY - disappearY
     }
     
-    func configureAnimators() {
-        appearAnimator = UIViewPropertyAnimator(duration: 0.2, curve: .easeIn, animations: { [unowned self] in
-            self.alpha = self.tag > 2 ? 0 : 1
-        })
-        appearAnimator.addCompletion { [unowned self] (position) in
-            self.alpha = self.tag > 2 ? 1 : 0
-        }
-        appearAnimator.scrubsLinearly = false
-        appearAnimator.startAnimation()
-        appearAnimator.pauseAnimation()
-    }
     
+    private func updateALebel(state: ALabelState) {
+        print("updated tag: \(tag)")
+        guard aLabelState != state else {return}
+        
+        textColor = tag == 12 ? ALabelState.selected.textColor : state.textColor //top caption label always is selected
+        switch state {
+        case .moved:
+            ()
+        case .hidden:
+            ()
+        case .shown:
+            ()
+        case .selected:
+            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+        }
+        aLabelState = state
+    }
+}
+
+extension ALabel: Animatable {
     func animate(y: CGFloat) {
         print("animated tag: \(tag)")
         if y.isIn(includingTop: topMoveY, excludingBot: botMoveY) {
@@ -110,49 +121,45 @@ class ALabel: UILabel, Animatable {
         }
         
         if y.isIn(includingTop: botMoveY, excludingBot: disappearY) { //disappear -> 100
-            if tag > 2 {
-                //updateALebel(state: .hidden)
-                //appearAnimator.fractionComplete = y.getPercentage(fromY: botMoveY, toY: disappearY)
-                alpha = 1-y.getPercentage(fromY: botMoveY, toY: disappearY)
-                print("animate disappear yp: \(y.getPercentage(fromY: botMoveY, toY: disappearY))")
-                print("per: \(y.getPercentage(fromY: botMoveY, toY: disappearY)) alpha: \(alpha) tag: \(tag)")
+            let p = y.getPercentage(fromY: botMoveY, toY: disappearY)
+            if isMenuLabel {
+                alpha = 0
+                print("per: \(p) alpha: \(alpha) tag: \(tag)")
             }else{
-                alpha = 0 //y.getPercentage(fromY: botMoveY, toY: disappearY)
-                print("per: \(y.getPercentage(fromY: botMoveY, toY: disappearY)) alpha: \(alpha) tag: \(tag)")
+                alpha = 1 - p
+                print("per: \(p)) alpha: \(alpha) tag: \(tag)")
             }
         }
         
         if y.isIn(includingTop: disappearY, excludingBot: appearY){ //appear -> 0
-            if tag > 2 {
-                //updateALebel(state: .shown)
-                //appearAnimator.fractionComplete = y.getPercentage(fromY: disappearY, toY: appearY)
-                alpha = 0//1 - y.getPercentage(fromY: disappearY, toY: appearY)
-                print("animate appear yp: \(y.getPercentage(fromY: disappearY, toY: appearY))")
-                print("per: \(y.getPercentage(fromY: disappearY, toY: appearY)) alpha: \(alpha) tag: \(tag)")
+            let p = y.getPercentage(fromY: disappearY, toY: appearY)
+            if isMenuLabel {
+                alpha = p
+                print("per: \(p) alpha: \(alpha) tag: \(tag)")
             }else{
-                
-                alpha = y.getPercentage(fromY: disappearY, toY: appearY)
-                print("per: \(y.getPercentage(fromY: disappearY, toY: appearY)) alpha: \(alpha) tag: \(tag)")
+                alpha = 0
+                print("animate appear yp: \(p)")
+                print("per: \(p)) alpha: \(alpha) tag: \(tag)")
             }
         }
         
-        if y < botMoveY && tag > 2 {
-            alpha = 1
-        }
-
-        if y < botMoveY && tag < 3 {
-            alpha = 0
-        }
-
-        if y > appearY && tag > 2 {
-            alpha = 0
-        }
-
-        if y > appearY && tag < 3 {
-            alpha = 1
+        if y < botMoveY {
+            if isMenuLabel {
+                alpha = 0
+            }else{
+                alpha = 1
+            }
         }
         
-        if tag < 3 {
+        if y > appearY {
+            if isMenuLabel {
+                alpha = 1
+            }else{
+                alpha = 0
+            }
+        }
+        
+        if isMenuLabel {
             if y.isIn(includingTop: topSelectY, excludingBot: botSelectY) {
                 updateALebel(state: .selected)
             }else{
@@ -177,62 +184,20 @@ class ALabel: UILabel, Animatable {
             default:
                 print("wrong tag: \(tag)")
             }
-            
-            //updateALebel(state: .shown)
+            updateALebel(state: .shown)
         default:
             ()
         }
         
         UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.1, delay: 0.0, options: [.curveEaseIn], animations: { [unowned self] in
-            if self.tag <= 2 { self.alpha = 0 } //hide menu
+            if self.isMenuLabel { self.alpha = 0 } //hide menu
         }) { (position) in
             UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.1, delay: 0.0, options: [.curveEaseIn], animations: { [unowned self] in
-                if self.tag > 2 { self.alpha = 1 } //show caption
-            }, completion: { [unowned self] (position) in
-                //self.appearAnimator.stopAnimation(true)
-                //self.appearAnimator.finishAnimation(at: .end)
-                //self.configureAnimators()
+                if !self.isMenuLabel { self.alpha = 1 } //show caption
+                }, completion: { (position) in
+                    //some complition operations
+                    //[unowned self]
             })
         }
     }
-    
-    func updateALebel(state: ALabelState) {
-        
-        print("updated tag: \(tag)")
-        
-        guard aLabelState != state else {return}
-        
-        textColor = tag == 12 ? ALabelState.selected.textColor : state.textColor
-        switch state {
-        case .moved:
-            ()
-        case .hidden:
-            ()//appearAnimator.fractionComplete = 1//tag > 2 ? 0 : 1
-        case .shown:
-            ()//appearAnimator.fractionComplete = tag > 2 ? 1 : 0
-        case .selected:
-            ()//appearAnimator.fractionComplete = 1//tag > 2 ? 0 : 0
-            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-        }
-        
-        aLabelState = state
-        
-    }
-    public required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        configure()
-    }
-    func restoreTransform() {
-        transform = safedTransform
-    }
-    
-    func configure() {
-        safedTransform = transform
-        turnY = frame.origin.y
-        print("tY: \(turnY)  tag: \(tag)")
-        configureState()
-        configureY() //1!
-        //configureAnimators() //2
-    }
-    
 }

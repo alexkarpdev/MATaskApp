@@ -32,7 +32,7 @@ class RecsViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         animateArButton()
-        if isApearing {appearingAnimation()}
+        if !isApearing {appearingAnimation()}
         
     }
 
