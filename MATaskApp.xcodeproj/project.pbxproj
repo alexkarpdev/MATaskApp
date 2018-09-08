@@ -10,6 +10,7 @@
 		78237218214019BE000182EB /* AnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78237217214019BE000182EB /* AnimationController.swift */; };
 		7823721A2140A374000182EB /* ALabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782372192140A374000182EB /* ALabel.swift */; };
 		789E035E2142520400EC4B8A /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789E035D2142520400EC4B8A /* FirstViewController.swift */; };
+		78B0E24E21432011003C6B5F /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B0E24D21432011003C6B5F /* ARViewController.swift */; };
 		78C12817213EBB4C0065D8CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C12816213EBB4C0065D8CB /* AppDelegate.swift */; };
 		78C1281C213EBB4C0065D8CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78C1281A213EBB4C0065D8CB /* Main.storyboard */; };
 		78C12821213EBB4D0065D8CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78C1281F213EBB4D0065D8CB /* LaunchScreen.storyboard */; };
@@ -56,6 +57,7 @@
 		78237217214019BE000182EB /* AnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationController.swift; sourceTree = "<group>"; };
 		782372192140A374000182EB /* ALabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ALabel.swift; sourceTree = "<group>"; };
 		789E035D2142520400EC4B8A /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		78B0E24D21432011003C6B5F /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
 		78C12813213EBB4C0065D8CB /* MATaskApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MATaskApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78C12816213EBB4C0065D8CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		78C1281B213EBB4C0065D8CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 			children = (
 				78C12830213EE9050065D8CB /* RecsViewController.swift */,
 				789E035D2142520400EC4B8A /* FirstViewController.swift */,
+				78B0E24D21432011003C6B5F /* ARViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 				78C12833213EE95B0065D8CB /* MoviesCollectionView.swift in Sources */,
 				78C12875213EFE510065D8CB /* DBController.swift in Sources */,
 				78C12879213F07900065D8CB /* Extensions.swift in Sources */,
+				78B0E24E21432011003C6B5F /* ARViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -46,25 +46,46 @@ class RecsViewController: UIViewController, UIGestureRecognizerDelegate {
         
     }
     
-    func configure() {
+    private func configure() {
         watchLable.heightConstraint = aLabelHeightConstraint
         let aLabels: [ALabel] = [wantLabel, watchLable, likeLabel, moviesLabel, nextLabel]
         movieCollectionView.configure(movieItems: DBController.prepareData(for: moviesCount), aLabels: aLabels)
     }
     
-    func animateArButton() {
+    private func animateArButton() {
         let flash = CABasicAnimation(keyPath: "opacity")
-        flash.duration = 2
+        flash.duration = 5
         flash.fromValue = 1
         flash.toValue = 0.2
         flash.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
         flash.autoreverses = true
-        flash.repeatCount = Float.infinity
+        flash.repeatCount = 2
         
-        arButton.layer.add(flash, forKey: nil)
+        let muvX = CAKeyframeAnimation()
+        muvX.keyPath = "position.x"
+        muvX.values = (0..<50).map{ _ in return (-3).rnd }
+        muvX.keyTimes = (1...50).map{ i in return NSNumber(value: Float(i) / 5)}
+        muvX.duration = 10
+        muvX.autoreverses = true
+        muvX.isAdditive = true
+        
+        let muvY = CAKeyframeAnimation()
+        muvY.keyPath = "position.y"
+        muvY.values = (0..<50).map{ _ in return (-3).rnd}
+        muvY.keyTimes = (1...50).map{ i in return NSNumber(value: Float(i) / 5)}
+        muvY.duration = 10
+        muvY.autoreverses = true
+        muvY.isAdditive = true
+        let animationGroup = CAAnimationGroup()
+        animationGroup.animations = [flash, muvX, muvY]
+        animationGroup.repeatCount = Float.infinity
+        //animationGroup.autoreverses = true
+        animationGroup.duration = 20
+        
+        arButton.layer.add(animationGroup, forKey: nil)
     }
     
-    func appearingAnimation() {
+    private func appearingAnimation() {
         isApearing = true
         UIViewPropertyAnimator(duration: 3, dampingRatio: 0.6) { [unowned self] in
             self.view.alpha = 1

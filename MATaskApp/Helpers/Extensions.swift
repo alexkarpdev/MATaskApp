@@ -12,8 +12,15 @@ import UIKit
 // MARK: - Int
 
 extension Int {
-    var rnd: Int { // make self random from 0 to self
-        return Int(arc4random_uniform(UInt32(self)))
+    var rnd: Int {
+        guard self != 0 else {return self}
+        if self > 0 {
+            return Int(arc4random_uniform(UInt32(self))) // make self random from 0 to excluding self
+        }else{
+            let sign = 2.rnd < 1 ? -1 : 1
+            return Int(arc4random_uniform(UInt32(abs(self)))) * sign // make self random from excluding -self to excluding self
+        }
+        
     }
 }
 
