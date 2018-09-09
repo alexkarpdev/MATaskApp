@@ -12,11 +12,11 @@ class MovieCell: UICollectionViewCell {
     
     static let identifier = "MovieCell"
     
-    @IBOutlet weak var posterImageView: UIImageView!
+    @IBOutlet weak var posterImageView: AnimatableImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var homeImageView: UIImageView!
     @IBOutlet weak var ticketImageView: UIImageView!
-    @IBOutlet weak var panelView: UIView!
+    @IBOutlet weak var panelView: AnimatableView!
     
     func configure(from movieItem: MovieItem) {
         posterImageView.image = movieItem.image

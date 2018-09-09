@@ -11,7 +11,7 @@ import UIKit
 class RecsViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var movieCollectionView: MoviesCollectionView!
-    @IBOutlet var aLabels: [UILabel]!
+    @IBOutlet var aLabels: [AnimatableLabel]!
     
     @IBOutlet weak var arButton: UIButton!
     
@@ -48,7 +48,7 @@ class RecsViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     private func configure() {
-        let aViews: [Animatable] = [wantLabel, watchLable, likeLabel, moviesLabel, nextLabel]
+        let aViews: [Animatable] = aLabels
         animationController = AnimationController(conteinerView: view, aViews: aViews) { [unowned self] isLock in
             self.movieCollectionView.isScrollEnabled = !isLock
         }

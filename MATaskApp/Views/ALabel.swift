@@ -49,11 +49,6 @@ class ALabel: UILabel {
     var turnY: CGFloat = 0
     var animY: CGFloat = 0
     var allowTransform = true
-    var heightConstraint: NSLayoutConstraint! {
-        didSet{
-            startHeight = heightConstraint.constant
-        }
-    }
     
     
     public required init?(coder aDecoder: NSCoder) {
@@ -110,23 +105,23 @@ class ALabel: UILabel {
     }
 }
 
-extension ALabel: Movable {
+extension ALabel {
     
     func currentState() -> [String : Any] {
         return [String : Any]()
     }
     
-    func animate(y: CGFloat) {
+    func animate(tY: CGFloat) {
         print("animated tag: \(tag)")
-        if y.isIn(includingTop: topMoveY, excludingBot: botMoveY) {
+        if tY.isIn(includingTop: topMoveY, excludingBot: botMoveY) {
             updateALebel(state: .moved)
             allowTransform = true
         }else{
             allowTransform = false
         }
         
-        if y.isIn(includingTop: botMoveY, excludingBot: disappearY) { //disappear -> 100
-            let p = y.getPercentage(fromY: botMoveY, toY: disappearY)
+        if tY.isIn(includingTop: botMoveY, excludingBot: disappearY) { //disappear -> 100
+            let p = tY.getPercentage(fromY: botMoveY, toY: disappearY)
             if isMenuLabel {
                 alpha = 0
                 print("per: \(p) alpha: \(alpha) tag: \(tag)")
@@ -136,8 +131,8 @@ extension ALabel: Movable {
             }
         }
         
-        if y.isIn(includingTop: disappearY, excludingBot: appearY){ //appear -> 0
-            let p = y.getPercentage(fromY: disappearY, toY: appearY)
+        if tY.isIn(includingTop: disappearY, excludingBot: appearY){ //appear -> 0
+            let p = tY.getPercentage(fromY: disappearY, toY: appearY)
             if isMenuLabel {
                 alpha = p
                 print("per: \(p) alpha: \(alpha) tag: \(tag)")
@@ -148,7 +143,7 @@ extension ALabel: Movable {
             }
         }
         
-        if y < botMoveY {
+        if tY < botMoveY {
             if isMenuLabel {
                 alpha = 0
             }else{
@@ -156,7 +151,7 @@ extension ALabel: Movable {
             }
         }
         
-        if y > appearY {
+        if tY > appearY {
             if isMenuLabel {
                 alpha = 1
             }else{
@@ -165,7 +160,7 @@ extension ALabel: Movable {
         }
         
         if isMenuLabel {
-            if y.isIn(includingTop: topSelectY, excludingBot: botSelectY) {
+            if tY.isIn(includingTop: topSelectY, excludingBot: botSelectY) {
                 updateALebel(state: .selected)
             }else{
                 updateALebel(state: .shown)
