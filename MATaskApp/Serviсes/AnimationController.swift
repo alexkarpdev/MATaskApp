@@ -14,12 +14,18 @@ enum AnimationState {
     case goback
 }
 
-protocol Animatable {
-    func animate(y: CGFloat)
-    func endAnimate(state: UIGestureRecognizerState)
+protocol Animatable: class {
+    func animate(y: CGFloat, controlPoints: ControlPoints)
+    func endAnimate(touchState: UIGestureRecognizerState, initState: [String: Any])
+    func currentState() -> [String : Any]
 }
 
 class AnimationController: NSObject {
+    
+    private var initStates: [[String : Any]]
+    private var aViews: [Animatable]
+    private var controlPoints: ControlPoints
+    
     private var lockScroll: ((Bool)->())!
     private var isAnimating = false
     
@@ -41,13 +47,28 @@ class AnimationController: NSObject {
     var botBorderY: CGFloat = 0
     
     
-    init(collectionView: MoviesCollectionView, aLabels: [ALabel],  lockScroll: @escaping (Bool)->()) {
+    init(conteinerView: UIView, aViews: [Animatable],  lockScroll: @escaping (Bool)->()) {
         super.init()
-        self.aLabels = aLabels
-        conteinerView = collectionView.superview!
+        
+        self.aViews = aViews
+        self.conteinerView = conteinerView
         self.lockScroll = lockScroll
         panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan(recognizer:)))
         panGestureRecognizer.delegate = self
+        
+        saveInitStates() // if orientation changing is availabel perform it every time in animationBegin
+    }
+    
+    private func saveInitStates(){
+        initStates = [[String : Any]] ()
+        aViews.forEach {
+            initStates.append($0.currentState())
+        }
+    }
+    
+    func addCellViews(cellViews: [Animatable]) {
+        aViews.count == 5 ? aViews.append(contentsOf: cellViews):
+                            aViews.replaceSubrange(6...7, with: cellViews) 
     }
     
     
@@ -102,9 +123,10 @@ class AnimationController: NSObject {
                 return
             }
             
-            self.aLabels.forEach{
-                $0.endAnimate(state: recognizer.state)
+            for (i, v) in aLabels.enumerated() {
+                v.endAnimate(touchState: recognizer.state, initState: initStates[i])
             }
+            
             let backAnimator = UIViewPropertyAnimator(duration: 0.4, dampingRatio: 0.5)
             backAnimator.addAnimations { [unowned self] in
                 self.movedImageView.frame.origin.y = 0

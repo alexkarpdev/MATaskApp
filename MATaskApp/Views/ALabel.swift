@@ -110,7 +110,12 @@ class ALabel: UILabel {
     }
 }
 
-extension ALabel: Animatable {
+extension ALabel: Movable {
+    
+    func currentState() -> [String : Any] {
+        return [String : Any]()
+    }
+    
     func animate(y: CGFloat) {
         print("animated tag: \(tag)")
         if y.isIn(includingTop: topMoveY, excludingBot: botMoveY) {
@@ -168,11 +173,11 @@ extension ALabel: Animatable {
         }
     }
     
-    func endAnimate(state: UIGestureRecognizerState) {
+    func endAnimate(touchState: UIGestureRecognizerState, initState: [String: Any]) {
         print("end animated tag: \(tag)")
         textColor = tag == 12 ? ALabelState.selected.textColor : ALabelState.shown.textColor
         switch aLabelState {
-        case .selected where state == .ended:
+        case .selected where touchState == .ended:
             let generator = UINotificationFeedbackGenerator()
             switch tag {
             case 0: //

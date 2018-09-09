@@ -45,7 +45,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qhc-s5-EOx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-471" y="132"/>
+            <point key="canvasLocation" x="-690" y="181"/>
         </scene>
         <!--Recs View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -161,13 +161,13 @@
                                 </constraints>
                                 <state key="normal" image="SearchIcon"/>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" tag="11" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next to watch" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qtQ-tP-lep" customClass="ALabel" customModule="MATaskApp" customModuleProvider="target">
+                            <label opaque="NO" userInteractionEnabled="NO" tag="11" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next to watch" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qtQ-tP-lep">
                                 <rect key="frame" x="25" y="141" width="168.66666666666666" height="25"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="27"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" tag="12" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movies" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9BC-EZ-64Y" customClass="ALabel" customModule="MATaskApp" customModuleProvider="target">
+                            <label opaque="NO" userInteractionEnabled="NO" tag="12" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movies" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9BC-EZ-64Y">
                                 <rect key="frame" x="24.999999999999993" y="111" width="88.333333333333314" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="193-Yn-V46"/>
@@ -176,7 +176,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.65309301900000005" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Want" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U8z-q3-QTK" customClass="ALabel" customModule="MATaskApp" customModuleProvider="target">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Want" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U8z-q3-QTK">
                                 <rect key="frame" x="25" y="111" width="64.333333333333329" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="au4-Wg-Iif"/>
@@ -185,13 +185,13 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Watched" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="akM-tV-4Ei" customClass="ALabel" customModule="MATaskApp" customModuleProvider="target">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Watched" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="akM-tV-4Ei" userLabel="Watch Label">
                                 <rect key="frame" x="24.999999999999993" y="141" width="110.33333333333331" height="25"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="27"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't like this" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QTU-g0-UWL" customClass="ALabel" customModule="MATaskApp" customModuleProvider="target">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't like this" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QTU-g0-UWL">
                                 <rect key="frame" x="25" y="171" width="164" height="25"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="27"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
@@ -231,14 +231,13 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="aLabelHeightConstraint" destination="BGM-mX-jwD" id="zGr-HX-bhn"/>
                         <outlet property="arButton" destination="9J7-bI-1ba" id="NO3-6N-c33"/>
-                        <outlet property="likeLabel" destination="QTU-g0-UWL" id="O6w-Ig-Wg8"/>
                         <outlet property="movieCollectionView" destination="mGU-09-rqa" id="cA5-js-7Dp"/>
-                        <outlet property="moviesLabel" destination="9BC-EZ-64Y" id="qrd-ti-Y16"/>
-                        <outlet property="nextLabel" destination="qtQ-tP-lep" id="T2Q-fa-Fsu"/>
-                        <outlet property="wantLabel" destination="U8z-q3-QTK" id="NCa-5a-WRt"/>
-                        <outlet property="watchLable" destination="akM-tV-4Ei" id="FX2-8C-YsK"/>
+                        <outletCollection property="aLabels" destination="qtQ-tP-lep" collectionClass="NSMutableArray" id="slh-92-5vn"/>
+                        <outletCollection property="aLabels" destination="9BC-EZ-64Y" collectionClass="NSMutableArray" id="izw-TG-ngu"/>
+                        <outletCollection property="aLabels" destination="U8z-q3-QTK" collectionClass="NSMutableArray" id="eCL-6X-cdg"/>
+                        <outletCollection property="aLabels" destination="akM-tV-4Ei" collectionClass="NSMutableArray" id="T2R-V0-niK"/>
+                        <outletCollection property="aLabels" destination="QTU-g0-UWL" collectionClass="NSMutableArray" id="4Sl-v5-P1f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -258,7 +257,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wIJ-Td-Nnk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="762" y="132"/>
+            <point key="canvasLocation" x="932" y="98"/>
         </scene>
     </scenes>
     <resources>

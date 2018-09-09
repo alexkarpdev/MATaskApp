@@ -11,16 +11,14 @@ import UIKit
 class RecsViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var movieCollectionView: MoviesCollectionView!
-    @IBOutlet weak var wantLabel: ALabel!
-    @IBOutlet weak var watchLable: ALabel!
-    @IBOutlet weak var likeLabel: ALabel!
-    @IBOutlet weak var aLabelHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var moviesLabel: ALabel!
-    @IBOutlet weak var nextLabel: ALabel!
+    @IBOutlet var aLabels: [UILabel]!
+    
     @IBOutlet weak var arButton: UIButton!
     
     private let moviesCount = 20
     private var isApearing = false
+    
+    var animationController: AnimationController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,8 +29,11 @@ class RecsViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        animateArButton()
-        if !isApearing {appearingAnimation()}
+        
+        if !isApearing {
+            appearingAnimation()
+            animateArButton()
+        }
         
     }
 
@@ -47,9 +48,12 @@ class RecsViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     private func configure() {
-        watchLable.heightConstraint = aLabelHeightConstraint
-        let aLabels: [ALabel] = [wantLabel, watchLable, likeLabel, moviesLabel, nextLabel]
-        movieCollectionView.configure(movieItems: DBController.prepareData(for: moviesCount), aLabels: aLabels)
+        let aViews: [Animatable] = [wantLabel, watchLable, likeLabel, moviesLabel, nextLabel]
+        animationController = AnimationController(conteinerView: view, aViews: aViews) { [unowned self] isLock in
+            self.movieCollectionView.isScrollEnabled = !isLock
+        }
+        
+        movieCollectionView.configure(movieItems: DBController.prepareData(for: moviesCount), animationController: animationController)
     }
     
     private func animateArButton() {
@@ -63,7 +67,7 @@ class RecsViewController: UIViewController, UIGestureRecognizerDelegate {
         
         let muvX = CAKeyframeAnimation()
         muvX.keyPath = "position.x"
-        muvX.values = (0..<50).map{ _ in return (-3).rnd }
+        muvX.values = (0..<50).map{ _ in return (-4).rnd }
         muvX.keyTimes = (1...50).map{ i in return NSNumber(value: Float(i) / 5)}
         muvX.duration = 10
         muvX.autoreverses = true
@@ -71,7 +75,7 @@ class RecsViewController: UIViewController, UIGestureRecognizerDelegate {
         
         let muvY = CAKeyframeAnimation()
         muvY.keyPath = "position.y"
-        muvY.values = (0..<50).map{ _ in return (-3).rnd}
+        muvY.values = (0..<50).map{ _ in return (-4).rnd}
         muvY.keyTimes = (1...50).map{ i in return NSNumber(value: Float(i) / 5)}
         muvY.duration = 10
         muvY.autoreverses = true
@@ -81,6 +85,8 @@ class RecsViewController: UIViewController, UIGestureRecognizerDelegate {
         animationGroup.repeatCount = Float.infinity
         //animationGroup.autoreverses = true
         animationGroup.duration = 20
+        
+        animationGroup.isRemovedOnCompletion = false
         
         arButton.layer.add(animationGroup, forKey: nil)
     }

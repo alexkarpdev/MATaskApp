@@ -52,19 +52,15 @@ class MoviesCollectionView: UICollectionView {
         dataSource = self
     }
     
-    public func configure(movieItems: [MovieItem], aLabels: [ALabel]) {
+    public func configure(movieItems: [MovieItem], animationController: AnimationController) {
         self.movieItems = movieItems
-        animationController = AnimationController(collectionView: self, aLabels: aLabels) { [unowned self] isLock in
-            self.isScrollEnabled = !isLock
-        }
-        
+        self.animationController = animationController
     }
     
-    private func assignCellForAnimating(for number:Int) {
+    private func assignForAnimating(cellAtnumber number:Int) {
         print("assigned cell number: \(number)")
         if let movieCell = cellForItem(at: IndexPath(row: number, section: 0)) as! MovieCell? {
-            animationController.movedImageView = movieCell.posterImageView
-            animationController.cellPanelView = movieCell.panelView
+            animationController.addCellViews(cellViews: [movieCell.posterImageView, movieCell.panelView])
         }
     }
     
@@ -118,7 +114,7 @@ extension MoviesCollectionView: UICollectionViewDelegateFlowLayout {
                 (result) in
                 if result {
                     self.didStoppingCellNumber = 0
-                    self.assignCellForAnimating(for: 0)
+                    self.assignForAnimating(cellAtnumber: 0)
                     print("test")
                 }
             })
@@ -167,7 +163,7 @@ extension MoviesCollectionView {
         slideAnimator.addCompletion(){ [unowned self] position in
             if position == .end {
                 self.animationController.panGestureRecognizer.isEnabled = true
-                self.assignCellForAnimating(for: nextNumber)
+                self.assignForAnimating(cellAtnumber: nextNumber)
                 UISelectionFeedbackGenerator().selectionChanged()
                 self.didStoppingCellNumber = self.cellNumber(atPosition: self.contentOffset.x)
             }
