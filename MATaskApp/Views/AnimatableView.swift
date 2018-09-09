@@ -14,16 +14,19 @@ class AnimatableView: UIView, Animatable {
     private let botBorderY: CGFloat = 25
     private let moveKoef: CGFloat = 0.2
     
-    private var initState: [String: Any]!
+    private var initState: InitialStates!
     
     
     func animate(tY: CGFloat) {
         print("View ty: \(tY)")
-        let currentY = frame.origin.y
-        guard tY.isIn(includingTop: topBorderY, excludingBot: botBorderY) else {return}
-        frame.origin.y = (initState[StateProperties.y] as! CGFloat) + tY
         
-        alpha = 1 - tY.getPercentage(fromY: topBorderY, toY: botBorderY)
+        let tkY = tY * moveKoef
+        
+        let currentY = frame.origin.y
+        if tkY.isIn(includingTop: topBorderY, excludingBot: botBorderY){
+            frame.origin.y = initState.y + tkY
+            alpha = 1 - tY.getPercentage(fromY: topBorderY, toY: botBorderY)
+        }
         if tY >= botBorderY{
             alpha = 0
         }else if tY <= topBorderY{
@@ -33,18 +36,17 @@ class AnimatableView: UIView, Animatable {
     }
     
     func endAnimate(touchState: UIGestureRecognizerState) {
-        let endAnimator = UIViewPropertyAnimator(duration: 0.2, dampingRatio: 0.4)
+        let endAnimator = UIViewPropertyAnimator(duration: 0.2, dampingRatio: 0.6)
         endAnimator.addAnimations ({ [unowned self] in
-            self.setValue(self.initState[StateProperties.y], forKey: StateProperties.y)
-            self.setValue(self.initState[StateProperties.alpha], forKey: StateProperties.alpha)
+            self.frame.origin.y = self.initState.y
+            self.alpha = self.initState.alpha
             }, delayFactor: 0.2)
         
         endAnimator.startAnimation()
     }
     
     func saveState() {
-        initState = [StateProperties.y: frame.origin.y,
-                     StateProperties.alpha: alpha]
+        initState = InitialStates(y: frame.origin.y, alpha: alpha)
     }
     
     func applyInitState() {

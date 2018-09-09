@@ -20,7 +20,7 @@ enum ALState: String {
 
 class AnimatableLabel: UILabel, Animatable {
     
-    private var initState: [String: Any]!
+    private var initState: InitialStates!
     
     private var topBorderY: CGFloat = 0
     private var topMoveY: CGFloat = 5
@@ -48,7 +48,7 @@ class AnimatableLabel: UILabel, Animatable {
         print("animated tag: \(tag)")
         let currentY = frame.origin.y
         if tY.isIn(includingTop: topMoveY, excludingBot: botMoveY) {
-            frame.origin.y = (initState[StateProperties.y] as! CGFloat) + tY
+            frame.origin.y = initState.y + tY - topMoveY
         }else{
             // stop moving
         }
@@ -104,21 +104,21 @@ class AnimatableLabel: UILabel, Animatable {
     
     func endAnimate(touchState: UIGestureRecognizerState) {
         
-        setValue(initState[StateProperties.textColor], forKey: StateProperties.textColor)
+        textColor = initState.textColor
         
-        let labelAnimator = UIViewPropertyAnimator(duration: 0.2, dampingRatio: 0.5)
+        let labelAnimator = UIViewPropertyAnimator(duration: 0.4, dampingRatio: 0.6)
         labelAnimator.addAnimations { [unowned self] in
-            self.setValue(self.initState[StateProperties.alpha], forKey: StateProperties.alpha)
+            self.alpha = self.initState.alpha
         }
         labelAnimator.addAnimations ({ [unowned self] in
-            self.setValue(self.initState[StateProperties.y], forKey: StateProperties.y)
+            self.frame.origin.y = self.initState.y
             }, delayFactor: 0.2)
+        
+        labelAnimator.startAnimation()
     }
     
     func saveState() {
-        initState = [StateProperties.y: frame.origin.y,
-                                    StateProperties.alpha: alpha,
-                                    StateProperties.textColor: textColor]
+        initState = InitialStates(y: frame.origin.y, alpha: alpha, textColor: textColor)
     }
     
     

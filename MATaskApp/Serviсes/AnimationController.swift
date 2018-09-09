@@ -56,12 +56,17 @@ class AnimationController: NSObject {
         self.conteinerView = conteinerView
         self.lockScroll = lockScroll
         super.init()
+        
+        self.aViews.forEach {
+            $0.saveState()
+        }
         panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan(recognizer:)))
         panGestureRecognizer.delegate = self
     }
     
     func addCellViews(cellViews: [Animatable]) {
         cellViews.forEach{
+            $0.saveState()
             if let aImageView = ($0 as? AnimatableImageView){
                 aImageView.addGestureRecognizer(panGestureRecognizer)}
         }
@@ -75,9 +80,9 @@ class AnimationController: NSObject {
         if isBegin {
             UISelectionFeedbackGenerator().selectionChanged()
             //initialisation for start animations
-            aViews.forEach{
-                $0.saveState()
-            }
+//            aViews.forEach{
+//                $0.saveState()
+//            }
         }else{
             //deinit
             aLabels.forEach{
@@ -128,8 +133,9 @@ class AnimationController: NSObject {
         case .ended, .cancelled:
             
             print("end")
+            animationBegin(isBegin: false)
             aViews.forEach{
-                $0.animate(tY: recognizer.translation(in: ($0 as! UIView)).y)
+                $0.endAnimate(touchState: recognizer.state)
             }
             
 //            if self.movedImageView.frame.origin.y.rounded() == 0 {

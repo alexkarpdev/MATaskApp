@@ -15,10 +15,10 @@ class AnimatableImageView: UIImageView, Animatable {
         return 0 //superview!.frame.origin.y // fatalError("instance of AnimatableImageView has no superview!")
     }()
     private lazy var botBorderY: CGFloat = { //
-        return frame.height * 1.3 // 1.3 - koef for orientation
+        return frame.height / 2 * 1.3 // 1.3 - koef for orientation
     }()
     
-    private var initState: [String: Any]!
+    private var initState: InitialStates!
     
     func animate(tY: CGFloat) {
         print("imageView ty: \(tY)")
@@ -28,9 +28,9 @@ class AnimatableImageView: UIImageView, Animatable {
     }
     
     func endAnimate(touchState: UIGestureRecognizerState) {
-        let backAnimator = UIViewPropertyAnimator(duration: 0.4, dampingRatio: 0.5)
+        let backAnimator = UIViewPropertyAnimator(duration: 0.4, dampingRatio: 0.6)
         backAnimator.addAnimations { [unowned self] in
-            self.setValue(self.initState[StateProperties.y], forKey: StateProperties.y)
+            self.frame.origin.y = self.initState.y
         }
         backAnimator.addCompletion(){ [unowned self] position in
             //self.animationBegin(isBegin: false)
@@ -39,6 +39,6 @@ class AnimatableImageView: UIImageView, Animatable {
     }
     
     func saveState() {
-        initState = [StateProperties.y: frame.origin.y]
+        initState = InitialStates(y: frame.origin.y)
     }
 }
