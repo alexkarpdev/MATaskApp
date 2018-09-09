@@ -170,7 +170,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MATaskApp/ViewControllers/RecsViewController.swift"
-            timestampString = "558091530.783888"
+            timestampString = "558213018.778029"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "27"
@@ -186,7 +186,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MATaskApp/ViewControllers/RecsViewController.swift"
-            timestampString = "558091530.784152"
+            timestampString = "558213018.778096"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "34"
@@ -202,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MATaskApp/Views/AnimatableLabel.swift"
-            timestampString = "558202387.547883"
+            timestampString = "558213018.778146"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
             landmarkName = "animate(tY:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -218,43 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MATaskApp/Views/AnimatableLabel.swift"
-            timestampString = "558202387.548259"
+            timestampString = "558213018.778511"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
-            landmarkName = "animate(tY:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MATaskApp/Views/AnimatableLabel.swift"
-            timestampString = "558202387.5485229"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
-            landmarkName = "animate(tY:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MATaskApp/Views/AnimatableLabel.swift"
-            timestampString = "558202387.5488091"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
             landmarkName = "animate(tY:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -266,12 +234,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MATaskApp/Views/AnimatableView.swift"
-            timestampString = "558202387.549033"
+            timestampString = "558213018.778782"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
             landmarkName = "animate(tY:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MATaskApp/Servi&#x441;es/AnimationController.swift"
+            timestampString = "558213018.7790819"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "handlePan(recognizer:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MATaskApp/Servi&#x441;es/AnimationController.swift"
+            timestampString = "558213018.779353"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "handlePan(recognizer:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

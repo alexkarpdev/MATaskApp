@@ -12,27 +12,22 @@ import UIKit
 class AnimatableView: UIView, Animatable {
     private let topBorderY: CGFloat = 0
     private let botBorderY: CGFloat = 25
-    private let moveKoef: CGFloat = 0.2
+    private let moveKoef: CGFloat = 0.4
     
     private var initState: InitialStates!
     
     
     func animate(tY: CGFloat) {
-        print("View ty: \(tY)")
-        
         let tkY = tY * moveKoef
-        
-        let currentY = frame.origin.y
         if tkY.isIn(includingTop: topBorderY, excludingBot: botBorderY){
             frame.origin.y = initState.y + tkY
             alpha = 1 - tY.getPercentage(fromY: topBorderY, toY: botBorderY)
         }
-        if tY >= botBorderY{
+        if tkY >= botBorderY{
             alpha = 0
-        }else if tY <= topBorderY{
+        }else if tkY <= topBorderY{
             alpha = 1
         }
-        print("View alpha: \(alpha) p: \(tY.getPercentage(fromY: topBorderY, toY: botBorderY))")
     }
     
     func endAnimate(touchState: UIGestureRecognizerState) {
@@ -47,9 +42,5 @@ class AnimatableView: UIView, Animatable {
     
     func saveState() {
         initState = InitialStates(y: frame.origin.y, alpha: alpha)
-    }
-    
-    func applyInitState() {
-        
     }
 }

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		78237218214019BE000182EB /* AnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78237217214019BE000182EB /* AnimationController.swift */; };
-		7823721A2140A374000182EB /* ALabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782372192140A374000182EB /* ALabel.swift */; };
 		7876A9342145783500A025D9 /* InitialStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7876A9332145783500A025D9 /* InitialStates.swift */; };
 		789E035E2142520400EC4B8A /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789E035D2142520400EC4B8A /* FirstViewController.swift */; };
 		78B0E24E21432011003C6B5F /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B0E24D21432011003C6B5F /* ARViewController.swift */; };
@@ -370,7 +369,6 @@
 				78C12831213EE9050065D8CB /* RecsViewController.swift in Sources */,
 				78C12872213EFBB90065D8CB /* MovieCell.swift in Sources */,
 				78B0E25A21449CD3003C6B5F /* AnimatableView.swift in Sources */,
-				7823721A2140A374000182EB /* ALabel.swift in Sources */,
 				78C12833213EE95B0065D8CB /* MoviesCollectionView.swift in Sources */,
 				78B0E25C21449D05003C6B5F /* AnimatableImageView.swift in Sources */,
 				7876A9342145783500A025D9 /* InitialStates.swift in Sources */,

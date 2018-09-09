@@ -49,7 +49,7 @@ class RecsViewController: UIViewController, UIGestureRecognizerDelegate {
     
     private func configure() {
         let aViews: [Animatable] = aLabels
-        animationController = AnimationController(conteinerView: view, aViews: aViews) { [unowned self] isLock in
+        animationController = AnimationController(aViews: aViews) { [unowned self] isLock in
             self.movieCollectionView.isScrollEnabled = !isLock
         }
         

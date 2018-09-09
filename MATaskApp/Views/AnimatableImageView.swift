@@ -15,14 +15,13 @@ class AnimatableImageView: UIImageView, Animatable {
         return 0 //superview!.frame.origin.y // fatalError("instance of AnimatableImageView has no superview!")
     }()
     private lazy var botBorderY: CGFloat = { //
-        return frame.height / 2 * 1.3 // 1.3 - koef for orientation
+        return frame.height / 2 * 1 // 1.3 - koef for orientation
     }()
     
     private var initState: InitialStates!
     
     func animate(tY: CGFloat) {
         print("imageView ty: \(tY)")
-        let currentY = frame.origin.y
         guard tY.isIn(includingTop: topBorderY, excludingBot: botBorderY) else {return}
         frame.origin.y = tY
     }
@@ -33,8 +32,9 @@ class AnimatableImageView: UIImageView, Animatable {
             self.frame.origin.y = self.initState.y
         }
         backAnimator.addCompletion(){ [unowned self] position in
-            //self.animationBegin(isBegin: false)
+            ()
         }
+        
         backAnimator.startAnimation()
     }
     

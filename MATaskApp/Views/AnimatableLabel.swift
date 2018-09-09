@@ -11,7 +11,7 @@ import UIKit
 
 enum ALState: String {
     case selected = "selected"
-    case deselcted = "deselected"
+    case deselected = "deselected"
     
     var textColor: UIColor {
         return self == .selected ? #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.65) : #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3) // 65% : 30%
@@ -41,12 +41,9 @@ class AnimatableLabel: UILabel, Animatable {
         return tag < 3
     }()
     
-    var aLState: ALState!
+    var aLState: ALState = .deselected
     
     func animate(tY: CGFloat) {
-        print("label ty: \(tY) tag:  \(tag)")
-        print("animated tag: \(tag)")
-        let currentY = frame.origin.y
         if tY.isIn(includingTop: topMoveY, excludingBot: botMoveY) {
             frame.origin.y = initState.y + tY - topMoveY
         }else{
@@ -93,17 +90,35 @@ class AnimatableLabel: UILabel, Animatable {
         
         if isMenuLabel {
             if tY.isIn(includingTop: topSelectY, excludingBot: botSelectY) {
-                textColor = ALState.selected.textColor
-                //updateALebel(state: .selected)
+                updateALabelState(state: .selected)
             }else{
-                textColor = ALState.deselcted.textColor
-                //updateALebel(state: .deselected)
+                updateALabelState(state: .deselected)
             }
         }
     }
     
     func endAnimate(touchState: UIGestureRecognizerState) {
         
+        switch aLState {
+        case .selected where touchState == .ended:
+            let generator = UINotificationFeedbackGenerator()
+            switch tag {
+            case 0: //
+                generator.notificationOccurred(.warning)
+            //accept selection
+            case 1:
+                generator.notificationOccurred(.success)
+            //accept selection
+            case 2:
+                generator.notificationOccurred(.error)
+            //accept selection
+            default:
+                print("wrong tag: \(tag)")
+            }
+        default:
+            ()
+        }
+        aLState = .deselected
         textColor = initState.textColor
         
         let labelAnimator = UIViewPropertyAnimator(duration: 0.4, dampingRatio: 0.6)
@@ -115,6 +130,13 @@ class AnimatableLabel: UILabel, Animatable {
             }, delayFactor: 0.2)
         
         labelAnimator.startAnimation()
+    }
+    
+    func updateALabelState(state: ALState) {
+        guard state != aLState else {return}
+        aLState = state
+        textColor = aLState.textColor
+        aLState == .selected ? UIImpactFeedbackGenerator(style: .medium).impactOccurred() : ()
     }
     
     func saveState() {
