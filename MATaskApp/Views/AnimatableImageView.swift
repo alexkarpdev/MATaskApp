@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class AnimatableImageView: UIImageView, Animatable {
+class AnimatableImageView: UIImageView {
     
     private lazy var topBorderY: CGFloat = {
         return 0 //superview!.frame.origin.y // fatalError("instance of AnimatableImageView has no superview!")
@@ -19,23 +19,25 @@ class AnimatableImageView: UIImageView, Animatable {
     }()
     
     private var initState: InitialStates!
-    
+}
+
+extension AnimatableImageView: Animatable {
     func animate(tY: CGFloat) {
         print("imageView ty: \(tY)")
         guard tY.isIn(includingTop: topBorderY, excludingBot: botBorderY) else {return}
         frame.origin.y = tY
     }
     
-    func endAnimate(touchState: UIGestureRecognizerState) {
-        let backAnimator = UIViewPropertyAnimator(duration: 0.4, dampingRatio: 0.6)
-        backAnimator.addAnimations { [unowned self] in
+    func endAnimate(touchState: UIGestureRecognizerState, complition: (()->())?) {
+        let endAnimator = UIViewPropertyAnimator(duration: 0.4, dampingRatio: 0.6)
+        endAnimator.addAnimations { [unowned self] in
             self.frame.origin.y = self.initState.y
         }
-        backAnimator.addCompletion(){ [unowned self] position in
-            ()
+        endAnimator.addCompletion(){ [unowned self] position in
+            complition!()
         }
-        
-        backAnimator.startAnimation()
+        endAnimator.isUserInteractionEnabled = false
+        endAnimator.startAnimation()
     }
     
     func saveState() {

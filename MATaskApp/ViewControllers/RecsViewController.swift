@@ -10,7 +10,7 @@ import UIKit
 
 class RecsViewController: UIViewController, UIGestureRecognizerDelegate {
     
-    @IBOutlet weak var movieCollectionView: MoviesCollectionView!
+    @IBOutlet weak var movieCollectionView: SlidedCollectionView!
     @IBOutlet var aLabels: [AnimatableLabel]!
     
     @IBOutlet weak var arButton: UIButton!

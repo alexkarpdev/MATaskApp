@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MoviesCollectionView: UICollectionView {
+class SlidedCollectionView: UICollectionView {
 
     private var collectionViewFlowLayout: UICollectionViewFlowLayout {
         return collectionViewLayout as! UICollectionViewFlowLayout
@@ -35,7 +35,7 @@ class MoviesCollectionView: UICollectionView {
     private let hyperScrollLimit: CGFloat = 2.2
     private var targetPoint = CGPoint()
     private var isHyperScrolling = false
-    private var slideAnimator = UIViewPropertyAnimator()
+    //private var slideAnimator = UIViewPropertyAnimator()
     private var didStoppingCellNumber: Int = -1
     private var animationController: AnimationController!
     
@@ -72,7 +72,7 @@ class MoviesCollectionView: UICollectionView {
 
 // MARK: - Data source
 
-extension MoviesCollectionView: UICollectionViewDataSource {
+extension SlidedCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return movieItems.count
     }
@@ -87,13 +87,13 @@ extension MoviesCollectionView: UICollectionViewDataSource {
 
 // MARK: - Delegate
 
-extension MoviesCollectionView: UICollectionViewDelegate {
+extension SlidedCollectionView: UICollectionViewDelegate {
     
 }
 
-// MARK: - Delegate
+// MARK: - Flow Layout Delegate
 
-extension MoviesCollectionView: UICollectionViewDelegateFlowLayout {
+extension SlidedCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let sizeKoef = collectionViewFlowLayout.itemSize.width / collectionViewFlowLayout.itemSize.height
         let cellSize = CGSize(width: (frame.height * sizeKoef).rounded(), height: frame.height)
@@ -126,7 +126,7 @@ extension MoviesCollectionView: UICollectionViewDelegateFlowLayout {
 
 // MARK: - Slide animation
 
-extension MoviesCollectionView {
+extension SlidedCollectionView {
     
     private func cellNumber(atPosition position: CGFloat) -> Int {
         let number = Int((position / cellBlock).rounded())
@@ -157,17 +157,19 @@ extension MoviesCollectionView {
         isHyperScrolling = false
         let toPoint = stopPosition(forCell: nextNumber)
         
-        slideAnimator = UIViewPropertyAnimator(duration: 0.2, curve: .easeInOut, animations: { [unowned self] in
+        let slideAnimator = UIViewPropertyAnimator(duration: 0.2, curve: .easeInOut, animations: { [unowned self] in
             self.contentOffset = toPoint
         })
         slideAnimator.addCompletion(){ [unowned self] position in
             if position == .end {
-                self.animationController.panGestureRecognizer.isEnabled = true
-                self.assignForAnimating(cellAtnumber: nextNumber)
+                self.isScrollEnabled ? self.assignForAnimating(cellAtnumber: nextNumber) : ()
                 UISelectionFeedbackGenerator().selectionChanged()
                 self.didStoppingCellNumber = self.cellNumber(atPosition: self.contentOffset.x)
+                self.animationController.panGestureRecognizer.isEnabled = true
+                print("end slide animation. scrolling enabled: \(self.isScrollEnabled)")
             }
         }
+        print("start sliding animation")
         slideAnimator.startAnimation()
 
     }
@@ -175,7 +177,7 @@ extension MoviesCollectionView {
     // MARK: - Scrollview delegate methods
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        
+        print("will end grugging")
         if velocity.x.abs < hyperScrollLimit {
             isHyperScrolling = false
             targetContentOffset.pointee = scrollView.contentOffset
@@ -192,7 +194,7 @@ extension MoviesCollectionView {
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
         if !isHyperScrolling { stopDeceleration(for: scrollView) }
     }
-    
+
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         animationController.panGestureRecognizer.isEnabled = false
         if isHyperScrolling && (targetPoint.x - scrollView.contentOffset.x).abs < 100 {
@@ -200,7 +202,6 @@ extension MoviesCollectionView {
             startSlideAnimation()
         }
     }
-    
 }
 
 

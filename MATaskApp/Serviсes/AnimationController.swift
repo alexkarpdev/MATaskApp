@@ -11,7 +11,7 @@ import UIKit
 
 protocol Animatable: class {
     func animate(tY: CGFloat)
-    func endAnimate(touchState: UIGestureRecognizerState)
+    func endAnimate(touchState: UIGestureRecognizerState, complition: (()->())?)
     func saveState()
 }
 
@@ -33,6 +33,7 @@ class AnimationController: NSObject {
         }
         panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan(recognizer:)))
         panGestureRecognizer.delegate = self
+        panGestureRecognizer.maximumNumberOfTouches = 1
     }
     
     func addCellViews(cellViews: [Animatable]) {
@@ -46,11 +47,11 @@ class AnimationController: NSObject {
     }
     
     
-    func animationBegin(isBegin: Bool) {
+    private func animationBegin(isBegin: Bool) {
         guard isBegin != isBeginAnimation else {return}
         print("animation begin: \(isBegin)")
         if isBegin {
-            UISelectionFeedbackGenerator().selectionChanged()
+            //UISelectionFeedbackGenerator().selectionChanged()
         }else{
             //deinit
         }
@@ -58,39 +59,32 @@ class AnimationController: NSObject {
         isBeginAnimation = isBegin
     }
     
-    @objc func handlePan(recognizer: UIPanGestureRecognizer) {
+    @objc private func handlePan(recognizer: UIPanGestureRecognizer) {
         guard recognizer.numberOfTouches < 2 else { return }
         print("recognizer state: \(recognizer.state.rawValue)")
-        
-        guard recognizer.translation(in: (aViews.first as! UIView)).y > 10 else {return}
+        print("recognizer velocity: \(recognizer.velocity(in: (aViews.first as! UIView)).y)")
         
         switch recognizer.state {
-        case .began:
-            ()
-        case .changed:
+        //case .began:
+            
+        case .changed, .began:
             animationBegin(isBegin: true)
-            let tY = recognizer.translation(in: (aViews.first as! UIView)).y - 10
+            let tY = recognizer.translation(in: (aViews.first as! UIView)).y// - 10
             aViews.forEach{
                 $0.animate(tY: tY)
             }
+           //
         case .ended, .cancelled:
-            
             print("end")
             aViews.forEach{
-                $0.endAnimate(touchState: recognizer.state)
+                $0 is AnimatableImageView ? $0.endAnimate(touchState: recognizer.state, complition: {[unowned self] in
+                    self.animationBegin(isBegin: false)
+                }) : $0.endAnimate(touchState: recognizer.state, complition: nil)
             }
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1){ [unowned self] in //1 naverochku
-                self.animationBegin(isBegin: false)
-            }
-            
         default:
             ()
         }
     }
-    
-    
-    
 }
 
 extension AnimationController: UIGestureRecognizerDelegate {

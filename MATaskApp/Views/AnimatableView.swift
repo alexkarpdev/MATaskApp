@@ -9,14 +9,15 @@
 import Foundation
 import UIKit
 
-class AnimatableView: UIView, Animatable {
+class AnimatableView: UIView {
     private let topBorderY: CGFloat = 0
     private let botBorderY: CGFloat = 25
     private let moveKoef: CGFloat = 0.4
     
     private var initState: InitialStates!
-    
-    
+}
+
+extension AnimatableView: Animatable {
     func animate(tY: CGFloat) {
         let tkY = tY * moveKoef
         if tkY.isIn(includingTop: topBorderY, excludingBot: botBorderY){
@@ -30,7 +31,7 @@ class AnimatableView: UIView, Animatable {
         }
     }
     
-    func endAnimate(touchState: UIGestureRecognizerState) {
+    func endAnimate(touchState: UIGestureRecognizerState, complition: (()->())?) {
         let endAnimator = UIViewPropertyAnimator(duration: 0.2, dampingRatio: 0.6)
         endAnimator.addAnimations ({ [unowned self] in
             self.frame.origin.y = self.initState.y

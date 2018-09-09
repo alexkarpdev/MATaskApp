@@ -18,7 +18,7 @@ enum ALState: String {
     }
 }
 
-class AnimatableLabel: UILabel, Animatable {
+class AnimatableLabel: UILabel {
     
     private var initState: InitialStates!
     
@@ -41,8 +41,18 @@ class AnimatableLabel: UILabel, Animatable {
         return tag < 3
     }()
     
-    var aLState: ALState = .deselected
+    private var aLState: ALState = .deselected
     
+    private func updateALabelState(state: ALState) {
+        guard state != aLState else {return}
+        aLState = state
+        textColor = aLState.textColor
+        aLState == .selected ? UIImpactFeedbackGenerator(style: .medium).impactOccurred() : ()
+    }
+    
+}
+
+extension AnimatableLabel: Animatable {
     func animate(tY: CGFloat) {
         if tY.isIn(includingTop: topMoveY, excludingBot: botMoveY) {
             frame.origin.y = initState.y + tY - topMoveY
@@ -97,7 +107,7 @@ class AnimatableLabel: UILabel, Animatable {
         }
     }
     
-    func endAnimate(touchState: UIGestureRecognizerState) {
+    func endAnimate(touchState: UIGestureRecognizerState, complition: (()->())?) {
         
         switch aLState {
         case .selected where touchState == .ended:
@@ -121,27 +131,18 @@ class AnimatableLabel: UILabel, Animatable {
         aLState = .deselected
         textColor = initState.textColor
         
-        let labelAnimator = UIViewPropertyAnimator(duration: 0.4, dampingRatio: 0.6)
-        labelAnimator.addAnimations { [unowned self] in
+        let endAnimator = UIViewPropertyAnimator(duration: 0.4, dampingRatio: 0.6)
+        endAnimator.addAnimations { [unowned self] in
             self.alpha = self.initState.alpha
         }
-        labelAnimator.addAnimations ({ [unowned self] in
+        endAnimator.addAnimations ({ [unowned self] in
             self.frame.origin.y = self.initState.y
             }, delayFactor: 0.2)
         
-        labelAnimator.startAnimation()
-    }
-    
-    func updateALabelState(state: ALState) {
-        guard state != aLState else {return}
-        aLState = state
-        textColor = aLState.textColor
-        aLState == .selected ? UIImpactFeedbackGenerator(style: .medium).impactOccurred() : ()
+        endAnimator.startAnimation()
     }
     
     func saveState() {
         initState = InitialStates(y: frame.origin.y, alpha: alpha, textColor: textColor)
     }
-    
-    
 }
