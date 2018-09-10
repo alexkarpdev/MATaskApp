@@ -18,11 +18,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="taskapp1024" translatesAutoresizingMaskIntoConstraints="NO" id="UY5-oT-UH1">
-                                <rect key="frame" x="87.5" y="233.5" width="200" height="200"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="startLogo1024" translatesAutoresizingMaskIntoConstraints="NO" id="UY5-oT-UH1">
+                                <rect key="frame" x="112.5" y="258.5" width="150" height="150"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="03F-ac-LBf"/>
-                                    <constraint firstAttribute="height" constant="200" id="pke-f3-xkc"/>
+                                    <constraint firstAttribute="width" constant="150" id="03F-ac-LBf"/>
+                                    <constraint firstAttribute="height" constant="150" id="pke-f3-xkc"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -40,6 +40,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="taskapp1024" width="512" height="512"/>
+        <image name="startLogo1024" width="1024" height="1024"/>
     </resources>
 </document>

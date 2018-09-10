@@ -67,7 +67,7 @@ class AnimationController: NSObject {
         switch recognizer.state {
         //case .began:
             
-        case .changed, .began:
+        case .changed://, .began:
             animationBegin(isBegin: true)
             let tY = recognizer.translation(in: (aViews.first as! UIView)).y// - 10
             aViews.forEach{

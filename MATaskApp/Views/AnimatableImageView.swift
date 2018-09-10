@@ -33,7 +33,7 @@ extension AnimatableImageView: Animatable {
         endAnimator.addAnimations { [unowned self] in
             self.frame.origin.y = self.initState.y
         }
-        endAnimator.addCompletion(){ [unowned self] position in
+        endAnimator.addCompletion(){ position in
             complition!()
         }
         endAnimator.isUserInteractionEnabled = false

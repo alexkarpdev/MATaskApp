@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "startLogo1024.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "taskapp1024.png",
       "scale" : "2x"
     },
     {

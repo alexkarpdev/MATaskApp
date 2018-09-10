@@ -23,16 +23,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="taskapp1024" translatesAutoresizingMaskIntoConstraints="NO" id="Z5m-FP-6yH">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="endLogo1024" translatesAutoresizingMaskIntoConstraints="NO" id="Z5m-FP-6yH">
                                 <rect key="frame" x="107" y="268" width="200" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="2LO-Ti-qw8"/>
                                     <constraint firstAttribute="height" constant="200" id="Ce7-Zg-muF"/>
                                 </constraints>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="prP-J4-onN">
+                                <rect key="frame" x="118" y="279" width="178" height="178"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="178" id="MYn-5Q-XKY"/>
+                                    <constraint firstAttribute="width" constant="178" id="b2f-YC-roR"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="prP-J4-onN" firstAttribute="centerX" secondItem="Ey3-lt-VGf" secondAttribute="centerX" id="9bH-k6-Rlx"/>
+                            <constraint firstItem="prP-J4-onN" firstAttribute="centerY" secondItem="Ey3-lt-VGf" secondAttribute="centerY" id="Cyh-mZ-XnP"/>
                             <constraint firstItem="Z5m-FP-6yH" firstAttribute="centerX" secondItem="Ey3-lt-VGf" secondAttribute="centerX" id="jfn-cv-u9f"/>
                             <constraint firstItem="Z5m-FP-6yH" firstAttribute="centerY" secondItem="Ey3-lt-VGf" secondAttribute="centerY" id="sKa-IC-bIv"/>
                         </constraints>
@@ -45,7 +55,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qhc-s5-EOx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-690" y="181"/>
+            <point key="canvasLocation" x="-691.304347826087" y="180.16304347826087"/>
         </scene>
         <!--Recs View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -265,6 +275,6 @@
         <image name="SearchIcon" width="19" height="19"/>
         <image name="TicketsIcon" width="27" height="27"/>
         <image name="ar1024" width="34" height="40"/>
-        <image name="taskapp1024" width="512" height="512"/>
+        <image name="endLogo1024" width="1024" height="1024"/>
     </resources>
 </document>
