@@ -11,6 +11,7 @@ import UIKit
 class FirstViewController: UIViewController {
 
     @IBOutlet weak var logoImageView: UIImageView!
+    @IBOutlet weak var shapeView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,11 +29,12 @@ class FirstViewController: UIViewController {
 
         animation()
         
+        
     }
     
     func animation() {
-        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 1, delay: 0, options: [.curveEaseIn], animations: { [unowned self] in
-            self.logoImageView.alpha = 0
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.6, delay: 0.4, options: [.curveEaseIn], animations: { [unowned self] in
+            self.shapeView.frame = CGRect(origin: self.shapeView.frame.origin, size: CGSize(width: self.shapeView.frame.width, height: 0))
         }) { [unowned self] (position) in
             self.performSegue(withIdentifier: "next", sender: nil)
         }

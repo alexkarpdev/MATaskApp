@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		78237218214019BE000182EB /* AnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78237217214019BE000182EB /* AnimationController.swift */; };
 		7876A9342145783500A025D9 /* InitialStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7876A9332145783500A025D9 /* InitialStates.swift */; };
+		7876A93621466B0700A025D9 /* ShapeLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7876A93521466B0700A025D9 /* ShapeLayer.swift */; };
 		789E035E2142520400EC4B8A /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789E035D2142520400EC4B8A /* FirstViewController.swift */; };
 		78B0E24E21432011003C6B5F /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B0E24D21432011003C6B5F /* ARViewController.swift */; };
 		78B0E2502143C9FA003C6B5F /* ControlPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B0E24F2143C9FA003C6B5F /* ControlPoints.swift */; };
@@ -60,6 +61,7 @@
 /* Begin PBXFileReference section */
 		78237217214019BE000182EB /* AnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationController.swift; sourceTree = "<group>"; };
 		7876A9332145783500A025D9 /* InitialStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialStates.swift; sourceTree = "<group>"; };
+		7876A93521466B0700A025D9 /* ShapeLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeLayer.swift; sourceTree = "<group>"; };
 		789E035D2142520400EC4B8A /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		78B0E24D21432011003C6B5F /* ARViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
 		78B0E24F2143C9FA003C6B5F /* ControlPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlPoints.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 				78C12878213F07900065D8CB /* Extensions.swift */,
 				78B0E24F2143C9FA003C6B5F /* ControlPoints.swift */,
 				7876A9332145783500A025D9 /* InitialStates.swift */,
+				7876A93521466B0700A025D9 /* ShapeLayer.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 				78C12831213EE9050065D8CB /* RecsViewController.swift in Sources */,
 				78C12872213EFBB90065D8CB /* MovieCell.swift in Sources */,
 				78B0E25A21449CD3003C6B5F /* AnimatableView.swift in Sources */,
+				7876A93621466B0700A025D9 /* ShapeLayer.swift in Sources */,
 				78C12833213EE95B0065D8CB /* SlidedCollectionView.swift in Sources */,
 				78B0E25C21449D05003C6B5F /* AnimatableImageView.swift in Sources */,
 				7876A9342145783500A025D9 /* InitialStates.swift in Sources */,
